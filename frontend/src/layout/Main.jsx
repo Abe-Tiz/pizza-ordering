@@ -9,6 +9,8 @@ const Main = () => {
     <Box
       sx={{
         background: "linear-gradient(to bottom, #FEF2E6, #FFDDBB, #FEF3E7)",
+        width: "100vw",
+        overflowX:"hidden"
       }}
     >
       <Header />

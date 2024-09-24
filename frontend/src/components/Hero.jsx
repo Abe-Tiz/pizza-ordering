@@ -12,11 +12,20 @@ const Hero = () => {
           background: "linear-gradient(to bottom, #FEF2E6, #FFDDBB,#FEF2E6)",
           padding: "70px 30px",
           display: "flex",
-          justifyContent: "space-between",
-          width:"full"
+          display: "flex",
+          position: "relative",
+          overflow: "hidden",
+          // width: "100%",
+          alignItems: "center",
         }}
       >
-        <Box sx={{ display: "flex", flexDirection: "column", width: "50rem" }}>
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            width: { xs: "400px", md: "600px" },
+          }}
+        >
           <Typography variant="h1" sx={{ color: "#FF890F", font: "bold" }}>
             Order us
           </Typography>
@@ -41,7 +50,6 @@ const Hero = () => {
                 },
                 width: { xs: "100%", sm: "20rem" },
               }}
-              // inputProps={{ tabIndex: -1 }}
             />
             <Box
               sx={{
@@ -59,17 +67,16 @@ const Hero = () => {
             </Box>
           </Box>
         </Box>
-        {/* <Box> */}
-          <img
-            src={pizzaImage}
-            alt="hero Image"
-            style={{
-              maxWidth: "100%",
-              height: "100%",
-              backgroundColor: "transparent",
-            }}
-          />
-        {/* </Box> */}
+
+        <img
+          src={pizzaImage}
+          alt="hero Image"
+          style={{
+            maxWidth: "100%",
+            height: "100%",
+            backgroundColor: "transparent",
+          }}
+        />
       </Box>
 
       <Featured />

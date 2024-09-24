@@ -4,18 +4,20 @@ import { NavLink } from "react-router-dom";
 
 const Button = ({ title, onClick }) => {
   return (
-    <Box>
+    // <Box>
       <NavLink
         color="inherit"
         style={{
           backgroundColor: "#FF890F",
           color: "white",
-          padding: "5px 15px",
+          padding: "10px 25px",
+          width: "6rem",
+          borderRadius:"15px"
         }}
       >
         {title}
       </NavLink>
-    </Box>
+    // </Box>
   );
 };
 
