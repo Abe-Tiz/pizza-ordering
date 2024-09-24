@@ -2,7 +2,7 @@ import { Box, Typography, TextField } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import React from "react";
 import pizzaImage from "../assets/images/pizza-1.png";
-import Featured from "../pages/Featured";
+// import Featured from "../pages/Featured";
 
 const Hero = () => {
   return (
@@ -79,7 +79,7 @@ const Hero = () => {
         />
       </Box>
 
-      <Featured />
+    
     </>
   );
 };

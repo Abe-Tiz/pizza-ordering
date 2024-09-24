@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Box, Typography } from "@mui/material";
 import Slider from "react-slick";
-import FeaturedPizza from "../components/FeaturedPizza";
+import FeaturedPizza from "./FeaturedPizza";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { styled } from "@mui/system";
@@ -62,7 +62,7 @@ const Featured = () => {
   return (
     <Box
       sx={{
-        background: "linear-gradient(to bottom, #FEF2E6, #FFDDBB,#FEF2E6)",
+        background: "linear-gradient(to bottom, #FEF2E6,#FEF2E6)",
         padding: "40px",
       }}
     >
