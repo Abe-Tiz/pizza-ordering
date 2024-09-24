@@ -4,6 +4,7 @@ import Hero from '../components/Hero';
 import Featured from '../components/Featured';
 import PopularPizza from '../components/PopularPizza';
 import FastingPizza from '../components/FastingPizza';
+import Footer from '../components/Footer';
 
 const Home = () => {
   return (
@@ -13,6 +14,7 @@ const Home = () => {
       <TopRestorants />
       <PopularPizza />
       <FastingPizza />
+      <Footer />
     </>
   );
 }

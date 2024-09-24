@@ -22,8 +22,8 @@ const Featured = () => {
     dots: true,
     infinite: true,
     speed: 400,
-    slidesToShow: 1,
-    slidesToScroll: 1,
+    slidesToShow:  1,
+    slidesToScroll: direction === "right" ? 2 : 1,
     autoplay: true,
     autoplaySpeed: 2000,
     centerMode: true,
@@ -73,11 +73,12 @@ const Featured = () => {
         <Box style={{ margin: "0 15px", width: "300px", height: "400px" }}>
           <FeaturedPizza background="#50482B" />
         </Box>
-        <Box style={{ margin: "0 15px", width: "300px", height: "400px" }}>
-          <FeaturedPizza background="#296D60" />
-        </Box>
+       
         <Box style={{ margin: "0 15px", width: "300px", height: "400px" }}>
           <FeaturedPizza background="#2e3030" />
+        </Box>
+         <Box style={{ margin: "0 15px", width: "300px", height: "400px" }}>
+          <FeaturedPizza background="#296D60" />
         </Box>
       </Slider>
     </Box>

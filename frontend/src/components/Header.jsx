@@ -53,14 +53,14 @@ const Header = () => {
         sx={{
           background: "linear-gradient(to bottom, #FEF2E6, #FFDDBB, #FEF3E7)",
           color: "gray",
-          width:"100vw"
+          width:"100%"
         }}
       >
         <Toolbar
           sx={{
             backgroundColor: "#FFF3E7",
             color: "gray",
-            padding: "10px",
+            // padding: "10px",
           }}
         >
           <Typography variant="h6" style={{ flexGrow: 1 }}>

@@ -48,7 +48,7 @@ const FeaturedPizza = ({background}) => {
           gap:1
         }}
       >
-        <Typography variant="h2">
+        <Typography variant="h4">
           Make Your First Order and Get{" "}
           <span style={{ color: "#FFD700" }}>50% Off</span>
         </Typography>
@@ -73,7 +73,7 @@ const FeaturedPizza = ({background}) => {
           src={pizzaImage}
           alt="Pizza"
           style={{
-            maxWidth: "100%",
+            // maxWidth: "100%",
             height: "100vh",
             backgroundColor: "transparent",
           }}
