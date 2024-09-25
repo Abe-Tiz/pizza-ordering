@@ -13,7 +13,8 @@ import FacebookIcon from "@mui/icons-material/Facebook";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import YouTubeIcon from "@mui/icons-material/YouTube";
-// import PizzaIcon from "@mui/icons-material/Pizza";
+import pizzaLogo from "../assets/images/pizza-logo.png";
+
 import { NavLink } from "react-router-dom";
 
 const Footer = () => {
@@ -77,10 +78,15 @@ const Footer = () => {
                 alignItems: "center",
               }}
             >
-              <IconButton>
-                <LinkedInIcon sx={{ color: "#FF890F" }} />
-              </IconButton>
-              <Typography variant="h6" sx={{ color: "#ea7f15" ,fontWeight:"bold"}}>
+              <img
+                src={pizzaLogo}
+                alt="Description of the image"
+                style={{ width: 100, height: "auto" }}
+              />
+              <Typography
+                variant="h6"
+                sx={{ color: "#c1660c", fontWeight: "bold" }}
+              >
                 Pizza
               </Typography>
             </Box>

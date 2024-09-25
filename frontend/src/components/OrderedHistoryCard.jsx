@@ -63,6 +63,7 @@ const OrderedHistoryCard = ({ pizza }) => {
           </Typography>
         </Typography>
         <NavLink
+          to="/register"
           color="inherit"
           style={{
             backgroundColor: "transparent",

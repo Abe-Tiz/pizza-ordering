@@ -122,7 +122,8 @@ const Header = () => {
                     </NavLink>
                   ))}
                 </Box>
-                <NavLink
+                  <NavLink
+                    to="/register"
                   color="inherit"
                   style={{
                     backgroundColor: "#FF890F",
