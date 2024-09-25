@@ -12,8 +12,9 @@ import {
 import pizzaLogo from "../../assets/images/pizza-logo.png";
 import { z } from "zod";
 import { useDispatch } from "react-redux";
-import { registerRequest } from "../../redux/userSlice";
-import registerSchema from "../../validation/Validation";
+// import { registerRequest } from "../../redux/userSlice";
+import  { loginSchema } from "../../validation/Validation";
+import { loginRequest } from "../../redux/userSlice";
 
 const AdminLogin = () => {
   const dispatch = useDispatch();
@@ -21,7 +22,7 @@ const AdminLogin = () => {
     adminName: "",
     email: "",
     password: "",
-    location: "",
+    // location: "",
     phone: "",
   });
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -29,7 +30,7 @@ const AdminLogin = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData((prevDataA) => ({
+    setFormData((prevData) => ({
       ...prevData,
       [name]: value,
     }));
@@ -42,7 +43,7 @@ const AdminLogin = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      registerSchema.parse({ ...formData, confirmPassword });
+      loginSchema.parse({ ...formData, confirmPassword });
 
       if (formData.password !== confirmPassword) {
         setErrors({ confirmPassword: "Passwords do not match" });
@@ -51,7 +52,7 @@ const AdminLogin = () => {
 
       setErrors({});
 
-      dispatch(registerRequest(formData));
+      dispatch(loginRequest(formData));
     } catch (error) {
       if (error instanceof z.ZodError) {
         const formattedErrors = {};
@@ -69,7 +70,7 @@ const AdminLogin = () => {
         display: "flex",
         justifyContent: "space-between",
         flex: 1,
-        gap: 14,
+        gap: 10,
         height: "100%",
         width: "100%",
         padding: 0,
@@ -81,7 +82,7 @@ const AdminLogin = () => {
           backgroundColor: "#FF9921",
           display: "flex",
           alignItems: "center",
-          padding: 20,
+          padding: 15,
         }}
       >
         <img

@@ -14,8 +14,8 @@ import UploadIcon from "@mui/icons-material/Upload";
 import { z } from "zod";
 import { useDispatch } from "react-redux";
 import { registerRequest } from "../../redux/userSlice";
-import registerSchema from "../../validation/Validation";
-import { useNavigate } from 'react-router-dom';
+ import { useNavigate } from 'react-router-dom';
+import { registerSchema } from './../../validation/Validation';
 
 const AdminRegister = () => {
   const dispatch = useDispatch();

@@ -4,6 +4,8 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const { z } = require("zod");
 const { registerSchema } = require("../zod/Validation");
+const dotenv = require("dotenv");
+dotenv.config();
 
 const register = async (req, res) => {
   const { adminName, email, password, restaurantName, location, phone, logo } =
@@ -59,4 +61,43 @@ const getAdmin = async (req, res) => {
   }
 };
 
-module.exports = { register, getAdmin };
+// login admin
+const loginAdmin = async (req, res) => {
+  const {adminName, email, password,phone } = req.body;
+
+  try {
+    const user = await getUserByEmail(email);
+
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+    const isPasswordValid = await bcrypt.compare(password, user.password);
+    if (!isPasswordValid) {
+      return res.status(401).json({ message: "Password is not matched!" });
+    }
+  
+    // Check if adminName and phone match
+    if (user.adminname !== adminName) {
+      return res.status(401).json({ message: "Name is Not Matched!" });
+    }
+    else if ( user.phone !== phone) {
+      return res.status(401).json({ message: "Phone is Not Matched!" });
+    }
+    // Generate a JWT token
+    const token = jwt.sign(
+      { id: user.id, email: user.email },
+      process.env.JWT_SECRET,
+      {
+        expiresIn: "1h",
+      }
+    );
+    // console.log(user);
+    return res.status(200).json({ user, token });
+     
+  } catch (error) {
+    console.error("Error logging in admin:", error);
+    return res.status(500).json({ message: "Internal server error" });
+  }
+};
+
+module.exports = { register, getAdmin, loginAdmin };
