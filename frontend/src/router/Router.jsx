@@ -5,6 +5,8 @@ import Orders from "../pages/Orders";
 import Home from "../pages/Home";
 import Register from "../pages/auth/Register";
 import Login from "../pages/auth/Login";
+import AdminRegister from "../pages/auth/AdminRegister";
+import AdminLogin from "../pages/auth/AdminLogin";
  
 const router = createBrowserRouter([
   {
@@ -28,6 +30,14 @@ const router = createBrowserRouter([
   {
     path: "/login",
     element:<Login />
+  },
+  {
+    path: "/admin-register",
+    element:<AdminRegister />
+  },
+  {
+    path: "/admin-login",
+    element:<AdminLogin />
   }
 
 ]);

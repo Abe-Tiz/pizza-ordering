@@ -1,8 +1,9 @@
-import { Box, Typography, Avatar, Grid } from "@mui/material";
+import { Box, Typography, Avatar } from "@mui/material";
 import React from "react";
-import Button from './Button';
+ import Button from "./Button";
 
 const PizzaCard = ({ pizza }) => {
+
   return (
     <Box
       sx={{
@@ -11,14 +12,24 @@ const PizzaCard = ({ pizza }) => {
         flexDirection: "column",
         padding: 4,
         borderRadius: 3,
-        // boxShadow: 3,
-        flex: "start",
       }}
     >
-      <Avatar
-        src={pizza.image}
-        sx={{ width: "75%", height: 1, alignSelf: "center", mb: 2 }}
-      />
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          width: "190px",
+          height: "180px",
+          backgroundColor: "#FBE0C1",
+          borderRadius: 50,
+        }}
+      >
+        <Avatar
+          src={pizza.image}
+          sx={{ width: "75%", height: "auto", alignSelf: "center" }}
+        />
+      </Box>
 
       <Box
         sx={{ display: "flex", flexDirection: "column", alignItems: "start" }}
@@ -43,8 +54,6 @@ const PizzaCard = ({ pizza }) => {
         sx={{
           display: "flex",
           justifyContent: "space-between",
-          // padding: 2,
-          flex: "start",
           borderBottom: 1,
           borderBottomColor: "gray",
         }}
@@ -63,11 +72,8 @@ const PizzaCard = ({ pizza }) => {
             Birr
           </Typography>
         </Typography>
-        {/* <Button variant="contained" sx={{ backgroundColor: "#FF8100", mt: 2 }}>
-          Order
-        </Button> */}
         <Box>
-          <Button title="Order" />
+          <Button title="Order" path="/login" />
         </Box>
       </Box>
 
