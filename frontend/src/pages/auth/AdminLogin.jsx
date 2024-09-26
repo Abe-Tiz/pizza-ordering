@@ -8,16 +8,23 @@ import {
   Typography,
   Link,
   FormGroup,
+  Stack,
+  Alert,
 } from "@mui/material";
 import pizzaLogo from "../../assets/images/pizza-logo.png";
 import { z } from "zod";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 // import { registerRequest } from "../../redux/userSlice";
 import  { loginSchema } from "../../validation/Validation";
 import { loginRequest } from "../../redux/userSlice";
+import { useNavigate } from 'react-router-dom';
 
 const AdminLogin = () => {
   const dispatch = useDispatch();
+  const { user, error, loading } = useSelector((state) => state.user);
+
+  // console.log("user:",user)
+  const navigate =  useNavigate();
   const [formData, setFormData] = useState({
     adminName: "",
     email: "",
@@ -51,8 +58,12 @@ const AdminLogin = () => {
       }
 
       setErrors({});
-
-      dispatch(loginRequest(formData));
+      console.log("results:", error, loading);
+      
+      await dispatch(loginRequest(formData));
+      // if (!error && !loading) {
+      //   navigate("/admin-dashboard");
+      // } 
     } catch (error) {
       if (error instanceof z.ZodError) {
         const formattedErrors = {};
@@ -122,8 +133,15 @@ const AdminLogin = () => {
             Pizza
           </Typography>
         </Box>
+
+        { error && !loading && 
+          <Stack sx={{ width: "100%" }} spacing={2}>
+            <Alert severity="error">{error}</Alert>
+          </Stack>
+         }
+
         <Link
-          to="/admin-login"
+          to="/admin-register"
           variant="h6"
           sx={{
             color: "#c1660c",

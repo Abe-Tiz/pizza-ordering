@@ -7,6 +7,8 @@ import Register from "../pages/auth/Register";
 import Login from "../pages/auth/Login";
 import AdminRegister from "../pages/auth/AdminRegister";
 import AdminLogin from "../pages/auth/AdminLogin";
+import AdminLayout from "../layout/AdminLayout";
+import Dashboard from "../pages/Dashboard";
  
 const router = createBrowserRouter([
   {
@@ -38,6 +40,16 @@ const router = createBrowserRouter([
   {
     path: "/admin-login",
     element:<AdminLogin />
+  },
+  {
+    path: "/admin-dashboard",
+    element: <AdminLayout />,
+    children: [
+      {
+        path: "",
+        element:<Dashboard />
+      }
+    ]
   }
 
 ]);

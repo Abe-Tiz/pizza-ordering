@@ -5,6 +5,7 @@ const jwt = require("jsonwebtoken");
 const { z } = require("zod");
 const { registerSchema } = require("../zod/Validation");
 const dotenv = require("dotenv");
+const { defineAbilitiesFor } = require("../authorize/Ablity");
 dotenv.config();
 
 const register = async (req, res) => {
@@ -83,6 +84,10 @@ const loginAdmin = async (req, res) => {
     else if ( user.phone !== phone) {
       return res.status(401).json({ message: "Phone is Not Matched!" });
     }
+
+
+    // const abilities = defineAbilitiesFor(user);
+    
     // Generate a JWT token
     const token = jwt.sign(
       { id: user.id, email: user.email },
