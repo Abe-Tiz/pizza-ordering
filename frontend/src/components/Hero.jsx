@@ -12,7 +12,6 @@ const Hero = () => {
           background: "linear-gradient(to bottom, #FEF2E6, #FFDDBB,#FEF2E6)",
           padding: "70px 30px",
           display: "flex",
-          display: "flex",
           position: "relative",
           overflow: "hidden",
           // width: "100%",

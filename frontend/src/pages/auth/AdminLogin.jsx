@@ -17,8 +17,8 @@ import { useDispatch, useSelector } from "react-redux";
 // import { registerRequest } from "../../redux/userSlice";
 import  { loginSchema } from "../../validation/Validation";
 import { loginRequest } from "../../redux/userSlice";
-import { useNavigate } from 'react-router-dom';
-
+import { NavLink, useNavigate } from 'react-router-dom';
+ 
 const AdminLogin = () => {
   const dispatch = useDispatch();
   const { user, error, loading } = useSelector((state) => state.user);
@@ -61,9 +61,9 @@ const AdminLogin = () => {
       console.log("results:", error, loading);
       
       await dispatch(loginRequest(formData));
-      // if (!error && !loading) {
-      //   navigate("/admin-dashboard");
-      // } 
+      if (!error && !loading) {
+        navigate("/admin-dashboard");
+      } 
     } catch (error) {
       if (error instanceof z.ZodError) {
         const formattedErrors = {};
@@ -134,13 +134,13 @@ const AdminLogin = () => {
           </Typography>
         </Box>
 
-        { error && !loading && 
+        {error && !loading && (
           <Stack sx={{ width: "100%" }} spacing={2}>
             <Alert severity="error">{error}</Alert>
           </Stack>
-         }
+        )}
 
-        <Link
+        <NavLink
           to="/admin-register"
           variant="h6"
           sx={{
@@ -155,7 +155,7 @@ const AdminLogin = () => {
           }}
         >
           Add Admin
-        </Link>
+        </NavLink>
         <form onSubmit={handleSubmit} style={{ width: "100%" }}>
           <FormGroup
             sx={{

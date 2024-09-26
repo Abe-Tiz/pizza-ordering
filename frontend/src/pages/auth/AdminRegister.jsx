@@ -8,6 +8,8 @@ import {
   Typography,
   Link,
   FormGroup,
+  Stack,
+  Alert,
 } from "@mui/material";
 import pizzaLogo from "../../assets/images/pizza-logo.png";
 import UploadIcon from "@mui/icons-material/Upload";
@@ -31,6 +33,7 @@ const AdminRegister = () => {
   });
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errors, setErrors] = useState({});
+  const { user, error, loading } = useSelector((state) => state.user);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -66,7 +69,7 @@ const AdminRegister = () => {
 
       setErrors({});
       dispatch(registerRequest(formData)); 
-      navigate("/admin-login");
+      // navigate("/admin-login");
     } catch (error) {
       if (error instanceof z.ZodError) {
         const formattedErrors = {};
@@ -135,6 +138,11 @@ const AdminRegister = () => {
             Pizza
           </Typography>
         </Box>
+        {error && !loading && (
+          <Stack sx={{ width: "100%" }} spacing={2}>
+            <Alert severity="error">{error}</Alert>
+          </Stack>
+        )}
         <form onSubmit={handleSubmit} style={{ width: "100%" }}>
           <FormGroup
             sx={{
