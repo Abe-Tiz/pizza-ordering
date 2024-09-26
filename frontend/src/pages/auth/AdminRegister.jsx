@@ -14,7 +14,7 @@ import {
 import pizzaLogo from "../../assets/images/pizza-logo.png";
 import UploadIcon from "@mui/icons-material/Upload";
 import { z } from "zod";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { registerRequest } from "../../redux/userSlice";
  import { useNavigate } from 'react-router-dom';
 import { registerSchema } from './../../validation/Validation';

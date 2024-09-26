@@ -73,7 +73,7 @@ const PizzaCard = ({ pizza }) => {
           </Typography>
         </Typography>
         <Box>
-          <Button title="Order" path="/login" />
+          <Button title="Order" path="/register" />
         </Box>
       </Box>
 

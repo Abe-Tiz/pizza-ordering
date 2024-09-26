@@ -58,10 +58,11 @@ const AdminLogin = () => {
       }
 
       setErrors({});
-      console.log("results:", error, loading);
+      console.log("results:", error, user.token,loading);
       
       await dispatch(loginRequest(formData));
       if (!error && !loading) {
+        localStorage.setItem("token", user.token);
         navigate("/admin-dashboard");
       } 
     } catch (error) {

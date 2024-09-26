@@ -8,8 +8,8 @@ import Login from "../pages/auth/Login";
 import AdminRegister from "../pages/auth/AdminRegister";
 import AdminLogin from "../pages/auth/AdminLogin";
 import AdminLayout from "../layout/AdminLayout";
-import Dashboard from "../pages/Dashboard";
- 
+import AddMenu from "../pages/dashboard/AddMenu";
+  
 const router = createBrowserRouter([
   {
     path: "/",
@@ -27,19 +27,19 @@ const router = createBrowserRouter([
   },
   {
     path: "/register",
-    element:<Register />
+    element: <Register />,
   },
   {
     path: "/login",
-    element:<Login />
+    element: <Login />,
   },
   {
     path: "/admin-register",
-    element:<AdminRegister />
+    element: <AdminRegister />,
   },
   {
     path: "/admin-login",
-    element:<AdminLogin />
+    element: <AdminLogin />,
   },
   {
     path: "/admin-dashboard",
@@ -47,11 +47,10 @@ const router = createBrowserRouter([
     children: [
       {
         path: "",
-        element:<Dashboard />
+        element: <AddMenu />
       }
-    ]
-  }
-
+    ],
+  },
 ]);
 
 export default router;
