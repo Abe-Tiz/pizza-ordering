@@ -25,7 +25,7 @@ const AdminLayout = () => {
             Width: "100vw",
             // maxHeight: "100vh",
             margin: 3,
-            height:"100vh"
+            maxheight:"100vh"
           }}
         >
           <Outlet />

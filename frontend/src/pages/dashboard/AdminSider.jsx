@@ -1,4 +1,4 @@
-import { Box, Typography } from '@mui/material';
+import { Box, Button, Typography } from '@mui/material';
 import React from 'react'
 import { NavLink } from 'react-router-dom';
 import pizzaLogo from "../../assets/images/pizza-logo.png";
@@ -47,21 +47,31 @@ const AdminSider = () => {
           marginTop: 4,
         }}
       >
-        <NavLink style={{ padding: ".1em 2em" }} to="">
+        <NavLink style={{ padding: ".1em 2em" }} to="/admin-dashboard/ordered">
           Orders
         </NavLink>
-        <NavLink style={{ padding: ".1em 2em" }} to="">
+        <NavLink style={{ padding: ".1em 2em" }} to="/admin-dashboard">
           Add menu
         </NavLink>
-        <NavLink style={{ padding: ".1em 2em" }}  to="">
+        <NavLink style={{ padding: ".1em 2em" }} to="">
           Role
         </NavLink>
-        <NavLink style={{ padding: ".1em 2em" }} to="">
+        <NavLink
+          style={{
+            padding: ".1em 2em",
+            borderBottomWidth: "3px",
+            borderBottomColor: "gray",
+          }}
+          to=""
+        >
           User
         </NavLink>
-        <NavLink style={{ padding: "2em 2em" }} to="">
+        <Button
+          sx={{ padding: "2em 2em", color: "red", fontWeight: 700 }}
+          //  onClick={logout}
+        >
           Logout
-        </NavLink>
+        </Button>
       </Box>
     </Box>
   );

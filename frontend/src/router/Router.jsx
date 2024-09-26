@@ -9,6 +9,7 @@ import AdminRegister from "../pages/auth/AdminRegister";
 import AdminLogin from "../pages/auth/AdminLogin";
 import AdminLayout from "../layout/AdminLayout";
 import AddMenu from "../pages/dashboard/AddMenu";
+import OrderedMenu from "../pages/dashboard/OrderedMenu";
   
 const router = createBrowserRouter([
   {
@@ -42,13 +43,17 @@ const router = createBrowserRouter([
     element: <AdminLogin />,
   },
   {
-    path: "/admin-dashboard",
+    path: "admin-dashboard",
     element: <AdminLayout />,
     children: [
       {
         path: "",
-        element: <AddMenu />
-      }
+        element: <AddMenu />,
+      },
+      {
+        path: "ordered",
+        element: <OrderedMenu />,
+      },
     ],
   },
 ]);
