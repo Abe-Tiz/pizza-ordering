@@ -1,9 +1,6 @@
 import {
   Box,
   Button,
-  Checkbox,
-  FormControlLabel,
-  FormGroup,
   TextField,
   Typography,
   Grid,
@@ -12,6 +9,7 @@ import React, { useState } from "react";
 import UploadIcon from "@mui/icons-material/Upload";
 import { useDispatch, useSelector } from "react-redux";
 import { addMenuItemRequest } from "../../redux/menuSlice"; 
+import CustomCheckbox from "./CustomeCheckBox";
 
 const AddMenu = () => {
   const dispatch = useDispatch();
@@ -27,7 +25,6 @@ const AddMenu = () => {
   const [availableToppings, setAvailableToppings] = useState([
     "Cheese",
     "Pepperoni",
-    "Mushrooms",
     "Mushrooms",
   ]);
   const { menu, error, loading } = useSelector((state) => state.menu);
@@ -75,7 +72,6 @@ const AddMenu = () => {
       ...prevData,
       photo: file,
     }));
-
     // Create a preview URL for the uploaded image
     const previewUrl = URL.createObjectURL(file);
     setPhotoPreview(previewUrl);
@@ -96,7 +92,7 @@ const AddMenu = () => {
         gap: 3,
         width: 600,
         alignItems: "center",
-        alignSelf:"center"
+        alignSelf: "center"
       }}
     >
       <Typography variant="h5">Add Menu</Typography>
@@ -110,54 +106,48 @@ const AddMenu = () => {
           onChange={handleChange}
         />
         <Typography sx={{ color: "gray" }}>Toppings</Typography>
-          <Grid container spacing={2}>
-            {availableToppings.map((topping, index) => (
-              <Grid item xs={4} key={index}>
-                <FormControlLabel
-                  control={
-                    <Checkbox
-                      checked={formData.toppings.includes(topping)}
-                      onChange={handleToppingChange}
-                      value={topping}
-                    />
-                  }
-                  label={topping}
-                />
-              </Grid>
-            ))}
-
-            {showNewToppingInput ? (
-              <Box
-                sx={{
-                  display: "flex",
-                  alignItems: "center",
-                  gap: 2,
-                  marginTop: 2,
-                }}
-              >
-                <TextField
-                  label="New Topping"
-                  type="text"
-                  value={newTopping}
-                  onChange={(e) => setNewTopping(e.target.value)}
-                />
-                <Button onClick={handleAddNewTopping}>Add</Button>
-              </Box>
-            ) : (
-              <Button
-                onClick={() => setShowNewToppingInput(true)}
-                sx={{
-                  marginTop: 2,
-                  backgroundColor: "#f67f07",
-                  color: "#FFFF",
-                  width: 20,
-                }}
-              >
-                + Add
-              </Button>
-            )}
-          </Grid>
-
+        <Grid container spacing={2}>
+          {availableToppings.map((topping, index) => (
+            <Grid item xs={4} key={index}>
+              <CustomCheckbox
+                checked={formData.toppings.includes(topping)}
+                onChange={handleToppingChange}
+                value={topping}
+                label={topping}
+              />
+            </Grid>
+          ))}
+          {showNewToppingInput ? (
+            <Box
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                gap: 2,
+                marginTop: 2,
+              }}
+            >
+              <TextField
+                label="New Topping"
+                type="text"
+                value={newTopping}
+                onChange={(e) => setNewTopping(e.target.value)}
+              />
+              <Button onClick={handleAddNewTopping}>Add</Button>
+            </Box>
+          ) : (
+            <Button
+              onClick={() => setShowNewToppingInput(true)}
+              sx={{
+                marginTop: 2,
+                backgroundColor: "#f67f07",
+                color: "#FFFF",
+                width: 20,
+              }}
+            >
+              + Add
+            </Button>
+          )}
+        </Grid>
         <TextField
           label="Price"
           type="number"
@@ -171,14 +161,14 @@ const AddMenu = () => {
             sx={{
               display: "flex",
               flexDirection: "column",
-              padding: 4,
+              padding: 5,
               gap: 2,
             }}
           >
             <Button
               variant="contained"
               component="label"
-              sx={{ backgroundColor: "transparent", color: "#FF9921" }}
+              sx={{ backgroundColor: "transparent", color: "#FF9921",padding:2 }}
             >
               <UploadIcon sx={{ marginRight: 1 }} />
               Upload Pizza Photo
@@ -206,7 +196,7 @@ const AddMenu = () => {
               variant="contained"
               color="primary"
               fullWidth
-              sx={{ backgroundColor: "#FF9921", borderRadius: 10 }}
+              sx={{ backgroundColor: "#FF9921", borderRadius: 10,padding:2 }}
             >
               Submit
             </Button>

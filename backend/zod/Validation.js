@@ -18,4 +18,11 @@ const customerRegisterSchema = z.object({
   phone: z.string().min(10, "Phone number must be at least 10 characters long"), 
 });
 
-module.exports = { registerSchema, customerRegisterSchema };
+const roleSchema = z.object({
+  name: z.string().min(1, "Name is required"),
+  permission: z
+    .array(z.string())
+    .nonempty("Permission must be a non-empty array"),
+});
+
+module.exports = { registerSchema, customerRegisterSchema, roleSchema };

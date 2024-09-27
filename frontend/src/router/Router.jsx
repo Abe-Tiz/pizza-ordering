@@ -10,6 +10,7 @@ import AdminLogin from "../pages/auth/AdminLogin";
 import AdminLayout from "../layout/AdminLayout";
 import AddMenu from "../pages/dashboard/AddMenu";
 import OrderedMenu from "../pages/dashboard/OrderedMenu";
+import Role from "../pages/dashboard/Role";
   
 const router = createBrowserRouter([
   {
@@ -53,6 +54,10 @@ const router = createBrowserRouter([
       {
         path: "ordered",
         element: <OrderedMenu />,
+      },
+      {
+        path: "role",
+        element: <Role />,
       },
     ],
   },
