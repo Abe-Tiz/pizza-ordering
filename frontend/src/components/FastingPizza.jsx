@@ -1,9 +1,19 @@
 import { Box, Typography } from "@mui/material";
-import React from "react";
+import React, { useEffect } from "react";
 import { Grid } from "@mui/material";
 import PizzaCard from "./PizzaCard";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchMenuRequest } from "../redux/menuSlice";
 
 const FastingPizza = () => {
+
+    const dispatch = useDispatch();
+    const { menu, loading, error } = useSelector((state) => state.menu);
+
+    useEffect(() => {
+      dispatch(fetchMenuRequest());
+    }, [dispatch]);
+  
   const pizzaData = [
     {
       id: 1,
@@ -87,15 +97,38 @@ const FastingPizza = () => {
           marginBottom: "1.5rem",
         }}
       >
-       Fasting
+        Fasting
       </Typography>
-      <Grid container spacing={2}>
-        {pizzaData.map((pizza) => (
-          <Grid item xs={12} sm={6} md={4} key={pizza.id}>
-            <PizzaCard pizza={pizza} />
-          </Grid>
-        ))}
-      </Grid>
+
+      <Box
+        sx={{
+          display: "flex",
+          overflowX: "auto",
+          "&::-webkit-scrollbar": {
+            display: "none",
+          },
+          "-ms-overflow-style": "none",
+          "scrollbar-width": "none",
+          width: "100%",
+          height:500
+        }}
+      >
+        <Box sx={{ display: "flex", flexWrap: "nowrap", gap: "10px" }}>
+          {Array.isArray(menu) &&
+            menu.map((pizza, index) => (
+              <Box
+                key={index}
+                sx={{
+                  width: "500px",
+                  height: "200px",
+                  flexShrink: 0,
+                }}
+              >
+                <PizzaCard pizza={pizza} />
+              </Box>
+            ))}
+        </Box>
+      </Box>
     </Box>
   );
 };

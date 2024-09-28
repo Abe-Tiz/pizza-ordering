@@ -24,6 +24,20 @@ const userSlice = createSlice({
       state.error = action.payload;
     },
 
+    // get admin in each restaurant
+    FetchRestaurantRequest: (state) => {
+      state.loading = true;
+      state.error = null;
+    },
+    FetchRestaurantSuccess: (state, action) => {
+      state.loading = false;
+      state.user = action.payload;
+    },
+    FetchRestaurantFailure: (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    },
+
     // Login slice
     loginRequest: (state) => {
       state.loading = true;
@@ -45,7 +59,7 @@ const userSlice = createSlice({
     },
     CUSTOMER_CREATE_SUCCESS: (state, action) => {
       state.loading = false;
-      state.customer = action.payload; 
+      state.customer = action.payload;
     },
     CUSTOMER_CREATE_FAILURE: (state, action) => {
       state.loading = false;
@@ -59,7 +73,7 @@ const userSlice = createSlice({
     },
     CUSTOMER_LOGIN_SUCCESS: (state, action) => {
       state.loading = false;
-      state.customer = action.payload; 
+      state.customer = action.payload;
     },
     CUSTOMER_LOGIN_FAILURE: (state, action) => {
       state.loading = false;
@@ -75,6 +89,9 @@ export const {
   loginRequest,
   loginSuccess,
   loginFailure,
+  FetchRestaurantRequest,
+  FetchRestaurantSuccess,
+  FetchRestaurantFailure,
   
   CUSTOMER_CREATE_REQUEST,
   CUSTOMER_CREATE_SUCCESS,

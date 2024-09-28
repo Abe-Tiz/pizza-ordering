@@ -11,9 +11,10 @@ const Button = ({ title, path }) => {
       style={{
         backgroundColor: "#FF890F",
         color: "white",
-        padding: "10px 25px",
+        padding: "10px 20px",
         width: "6rem",
         borderRadius: "15px",
+        alignItems:"center"
       }}
     >
       {title}

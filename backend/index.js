@@ -16,6 +16,7 @@ const port = process.env.PORT;
 
 app.use(cors());
 app.use(bodyParser.json());
+app.use("/uploads", express.static("uploads"));
 
 checkConnection();
 // Routes

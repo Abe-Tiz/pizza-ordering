@@ -2,8 +2,14 @@ import { Box, Typography, Avatar } from "@mui/material";
 import React from "react";
  import Button from "./Button";
 
-const PizzaCard = ({ pizza }) => {
+const PizzaCard = ({ pizza,}) => {
+  // console.log("users:",user);
+  // const imageUrl = `http://localhost:4000/${pizza.photo.replace(/\\/g, "/")}`; 
 
+   const imageUrl = pizza.photo
+     ? `http://localhost:4000/${pizza.photo.replace(/\\/g, "/")}`
+     : "http://localhost:4000/uploads/placeholder.png";
+  
   return (
     <Box
       sx={{
@@ -26,8 +32,8 @@ const PizzaCard = ({ pizza }) => {
         }}
       >
         <Avatar
-          src={pizza.image}
-          sx={{ width: "75%", height: "auto", alignSelf: "center" }}
+          src={imageUrl}
+          sx={{ width: "85%", height: "85%", alignSelf: "center" }}
         />
       </Box>
 
@@ -56,6 +62,7 @@ const PizzaCard = ({ pizza }) => {
           justifyContent: "space-between",
           borderBottom: 1,
           borderBottomColor: "gray",
+          padding:2
         }}
       >
         <Typography
@@ -72,9 +79,9 @@ const PizzaCard = ({ pizza }) => {
             Birr
           </Typography>
         </Typography>
-        <Box>
+        {/* <Box> */}
           <Button title="Order" path="/register" />
-        </Box>
+        {/* </Box> */}
       </Box>
 
       <Box
@@ -92,7 +99,7 @@ const PizzaCard = ({ pizza }) => {
           color="text.secondary"
           sx={{ color: "#404040", fontWeight: "bold", fontSize: 20 }}
         >
-          {pizza.ownerName}
+          {pizza.name}
         </Typography>
       </Box>
     </Box>

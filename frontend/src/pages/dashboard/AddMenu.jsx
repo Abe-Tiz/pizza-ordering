@@ -90,9 +90,9 @@ const AddMenu = () => {
         justifyContent: "center",
         padding: "2rem 10rem",
         gap: 3,
-        width: 600,
+        // width: 600,
         alignItems: "center",
-        alignSelf: "center"
+        // alignSelf: "center"
       }}
     >
       <Typography variant="h5">Add Menu</Typography>

@@ -25,4 +25,4 @@ const roleSchema = z.object({
     .nonempty("Permission must be a non-empty array"),
 });
 
-module.exports = { registerSchema, customerRegisterSchema, roleSchema };
+module.exports = { registerSchema, customerRegisterSchema ,roleSchema};

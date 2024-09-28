@@ -2,6 +2,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import createSagaMiddleware from "redux-saga";
 import userReducer from "./userSlice";
 import menuReducer from "./menuSlice";
+import roleReducer from "./roleSlice";
 import { combineSlices } from "@reduxjs/toolkit";
 import rootSaga from "../sagas/rootSaga";
 
@@ -9,12 +10,13 @@ const sagaMiddleware = createSagaMiddleware();
 
 const rootReducer = combineSlices({
   user: userReducer,
-  menu:menuReducer
+  menu: menuReducer,
+  role:roleReducer
 });
 const store = configureStore({
   reducer: rootReducer,
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware({ thunk: false }).concat(sagaMiddleware),
+    getDefaultMiddleware().concat(sagaMiddleware),
 });
 
 sagaMiddleware.run(rootSaga);

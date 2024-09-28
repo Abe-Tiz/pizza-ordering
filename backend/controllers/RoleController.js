@@ -3,7 +3,7 @@ const { addRole } = require("../models/RoleModel");
 const { ZodError } = require("zod");
 const { roleSchema } = require("../zod/Validation");
 
-// create role
+// create permission
 const createRole = async (req, res) => {
   try {
     const validatedData = roleSchema.parse(req.body);

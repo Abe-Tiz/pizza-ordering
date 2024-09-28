@@ -1,5 +1,6 @@
 
 const { addMenuItem } = require("../models/menuModel");
+const { getMenu } = require("../models/UserModel");
 
 // create menu item
 const createMenuItem = async (req, res) => {
@@ -15,6 +16,16 @@ const createMenuItem = async (req, res) => {
   }
 };
 
+const displayMenu = async (req, res) => {
+  try {
+    const menu = await getMenu();
+    res.status(200).json(menu)
+  } catch (error) {
+    res.status(500).json(error);
+  }
+}
+
 module.exports = {
   createMenuItem,
+  displayMenu,
 };

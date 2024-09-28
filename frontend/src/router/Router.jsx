@@ -11,6 +11,7 @@ import AdminLayout from "../layout/AdminLayout";
 import AddMenu from "../pages/dashboard/AddMenu";
 import OrderedMenu from "../pages/dashboard/OrderedMenu";
 import Role from "../pages/dashboard/Role";
+import ViewRole from "../pages/role/ViewRole";
   
 const router = createBrowserRouter([
   {
@@ -58,6 +59,10 @@ const router = createBrowserRouter([
       {
         path: "role",
         element: <Role />,
+      },
+      {
+        path: "view-role",
+        element: <ViewRole />,
       },
     ],
   },

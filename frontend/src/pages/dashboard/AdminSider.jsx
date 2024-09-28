@@ -53,7 +53,10 @@ const AdminSider = () => {
         <NavLink style={{ padding: ".1em 2em" }} to="/admin-dashboard">
           Add menu
         </NavLink>
-        <NavLink style={{ padding: ".1em 2em" }} to="/admin-dashboard/role">
+        <NavLink
+          style={{ padding: ".1em 2em" }}
+          to="/admin-dashboard/view-role"
+        >
           Role
         </NavLink>
         <NavLink

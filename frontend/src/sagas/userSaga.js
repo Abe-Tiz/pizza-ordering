@@ -13,7 +13,10 @@ import {
   CUSTOMER_CREATE_FAILURE,
   CUSTOMER_LOGIN_SUCCESS,
   CUSTOMER_LOGIN_FAILURE,
-  CUSTOMER_LOGIN_REQUEST
+  CUSTOMER_LOGIN_REQUEST,
+  FetchRestaurantSuccess,
+  FetchRestaurantFailure,
+  FetchRestaurantRequest
   
  } from "../redux/userSlice";
 
@@ -78,6 +81,23 @@ function* loginCustomer(action) {
   const errorMessage = error.response ? error.response.data.message : error.message;
     yield put(CUSTOMER_LOGIN_FAILURE(errorMessage));
   }
+}
+
+
+// get restaurants
+function* fetchRestaurantSaga() {
+  try {
+     const response = yield call(axios.get, "http://localhost:4000/user/admin");
+    const data = response.data; 
+    yield put(FetchRestaurantSuccess(data));
+    //  console.log("results:", result.payload);
+  } catch (error) {
+    yield put(FetchRestaurantFailure(error.message));
+  }
+}
+
+export function* watchFetchRestaurant() {
+  yield takeLatest(FetchRestaurantRequest.type, fetchRestaurantSaga);
 }
 
 // login CUSTOMER

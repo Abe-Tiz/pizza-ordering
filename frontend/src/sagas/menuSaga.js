@@ -4,6 +4,9 @@ import {
   addMenuItemRequest,
   addMenuItemSuccess,
   addMenuItemFailure,
+  fetchMenuSuccess,
+  fetchMenuFailure,
+  fetchMenuRequest,
 } from "../redux/menuSlice";
 import axios from "axios";
 
@@ -25,7 +28,7 @@ function* addMenuItem(action) {
         "Content-Type": "multipart/form-data",
       },
     });
-      console.log("response:",response)
+      // console.log("response:",response)
 
     yield put(addMenuItemSuccess(response.data)); 
   } catch (error) {
@@ -35,4 +38,19 @@ function* addMenuItem(action) {
 
 export function* watchAddMenuItem() {
   yield takeLatest(addMenuItemRequest.type, addMenuItem);
+}
+
+// fetch menu
+function* fetchMenuSaga() {
+  try {
+    const response = yield call(axios.get, "http://localhost:4000/menu/get-menu");
+    const data = yield response.data;
+    yield put(fetchMenuSuccess(data));
+  } catch (error) {
+    yield put(fetchMenuFailure(error.message));
+  }
+}
+
+export function* watchFetchMenu() {
+  yield takeLatest(fetchMenuRequest.type, fetchMenuSaga);
 }
