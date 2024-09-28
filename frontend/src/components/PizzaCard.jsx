@@ -2,8 +2,8 @@ import { Box, Typography, Avatar } from "@mui/material";
 import React from "react";
  import Button from "./Button";
 
-const PizzaCard = ({ pizza,}) => {
-  // console.log("users:",user);
+const PizzaCard = ({ pizza,user}) => {
+  console.log("users:",user);
   // const imageUrl = `http://localhost:4000/${pizza.photo.replace(/\\/g, "/")}`; 
 
    const imageUrl = pizza.photo

@@ -28,7 +28,7 @@ const Login = () => {
     });
     const { customer, error, loading } = useSelector((state) => state.user);
 
-    console.log("users:", customer, error, loading);
+    // console.log("users:", customer.token, error, loading);
 
     // Handle change in input fields
     const handleChange = (e) => {
@@ -43,21 +43,13 @@ const Login = () => {
     const handleSubmit = async (e) => {
       e.preventDefault();
       try {
-        // Validate form data
-        // customerCreateSchema.parse({ ...formData });
         dispatch(CUSTOMER_LOGIN_REQUEST(formData));
-        // if (!error && !loading) {
-        //   navigate("/login");
-        // }
+        if (!error && !loading) {
+          localStorage.setItem("customer-login", customer.token);
+          navigate("/customer-order");
+        }
       } catch (error) {
         console.log(error);
-        // if (error instanceof z.ZodError) {
-        //   const formattedErrors = {};
-        //   error.errors.forEach((err) => {
-        //     formattedErrors[err.path[0]] = err.message;
-        //   });
-        //   console.log("ERROR:",formattedErrors);
-        // }
       }
   };
   

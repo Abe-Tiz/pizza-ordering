@@ -12,6 +12,7 @@ import AddMenu from "../pages/dashboard/AddMenu";
 import OrderedMenu from "../pages/dashboard/OrderedMenu";
 import Role from "../pages/dashboard/Role";
 import ViewRole from "../pages/role/ViewRole";
+import Order from "../pages/Order";
   
 const router = createBrowserRouter([
   {
@@ -43,6 +44,10 @@ const router = createBrowserRouter([
   {
     path: "/admin-login",
     element: <AdminLogin />,
+  },
+  {
+    path: "/customer-order",
+    element: <Order />,
   },
   {
     path: "admin-dashboard",

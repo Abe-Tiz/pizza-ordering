@@ -62,7 +62,7 @@ const AdminLogin = () => {
       
       await dispatch(loginRequest(formData));
       if (!error && !loading) {
-        localStorage.setItem("token", user.token);
+        localStorage.setItem("amin-token", user.token);
         navigate("/admin-dashboard");
       } 
     } catch (error) {

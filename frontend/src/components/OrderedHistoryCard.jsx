@@ -16,10 +16,23 @@ const OrderedHistoryCard = ({ pizza }) => {
         flex: "start",
       }}
     >
-      <Avatar
-        src={pizza.image}
-        sx={{ width: "75%", height: 1, alignSelf: "center", mb: 2 }}
-      />
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          width: "190px",
+          height: "180px",
+          backgroundColor: "#FBE0C1",
+          borderRadius: 50,
+        }}
+      >
+        {" "}
+        <Avatar
+          src={pizza.image}
+          sx={{ width: "85%", height: "85%", alignSelf: "center"}}
+        />
+      </Box>
 
       <Box
         sx={{ display: "flex", flexDirection: "column", alignItems: "start" }}
