@@ -1,47 +1,34 @@
+import React, { useEffect, useState } from "react";
 import {
   Box,
   Button,
-  TableContainer,
-  Table,
-  TableHead,
-  TableRow,
-  TableCell,
-  TableBody,
-  IconButton,
-  TextField,
-  Tooltip,
   Dialog,
   DialogTitle,
   DialogContent,
   DialogActions,
-  Switch,
-  FormControlLabel,
+  Tooltip,
+  IconButton,
 } from "@mui/material";
-import {
-  Refresh,
-  Search,
-  GetApp,
-  Sort,
-  Fullscreen,
-  Visibility,
-  Delete,
-} from "@mui/icons-material";
-import React, { useState } from "react";
+import { Refresh, GetApp, Sort, Fullscreen } from "@mui/icons-material";
+// import ReusableTable from "./ReusableTable"; // Import the reusable table component
 import Role from "../dashboard/Role"; // Adjust the import path as necessary
 import UpdateRole from "./UpdateRole";
-// import Role from './../dashboard/Role';
-
-const initialRoles = [
-  { name: "Kitchen Manager", createdAt: "8/14/24", status: "Active" },
-  { name: "Cashier", createdAt: "8/14/24", status: "Active" },
-  { name: "Branch Manager", createdAt: "8/14/24", status: "Active" },
-];
+import { useDispatch, useSelector } from "react-redux";
+import { fetchRoleRequest } from "../../redux/roleSlice";
+import TableComponent from "../../components/TableComponent";
 
 const ViewRole = () => {
   const [openAdd, setOpenAdd] = useState(false);
   const [openUpdate, setOpenUpdate] = useState(false);
-  const [roles, setRoles] = useState(initialRoles);  
-  const [selectedRole, setSelectedRole] = useState(null);  
+  const [selectedRole, setSelectedRole] = useState(null);
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(5);
+  const dispatch = useDispatch();
+  const { role } = useSelector((state) => state.role);
+
+  useEffect(() => {
+    dispatch(fetchRoleRequest());
+  }, [dispatch]);
 
   const handleClickOpenAdd = () => {
     setOpenAdd(true);
@@ -52,145 +39,102 @@ const ViewRole = () => {
   };
 
   const handleClickOpenUpdate = (role) => {
-    setSelectedRole(role); // Set the selected role for editing
-    setOpenUpdate(true); // Open the update modal
+    setSelectedRole(role);
+    setOpenUpdate(true);
   };
 
   const handleCloseUpdate = () => {
     setOpenUpdate(false);
   };
 
-  const handleToggleStatus = (roleName) => {
-    setRoles((prevRoles) =>
-      prevRoles.map((role) =>
-        role.name === roleName
-          ? {
-              ...role,
-              status: role.status === "Active" ? "Inactive" : "Active",
-            }
-          : role
-      )
-    );
+  const handleToggleStatus = (role) => {
+    console.log(`Toggling status for role: ${role.name}`);
   };
 
   const handleDeleteRole = (role) => {
-    setRoles((prevRoles) => prevRoles.filter((r) => r.name !== role.name)); // Remove the role from the list
+    // Implement delete role logic
   };
 
   const handleUpdateRole = (updatedRole) => {
-    setRoles((prevRoles) =>
-      prevRoles.map((role) =>
-        role.name === updatedRole.name ? updatedRole : role
-      )
-    );
-    setOpenUpdate(false); // Close the update modal after updating
+    // Implement update role logic
   };
 
+  // Pagination handlers
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage);
+  };
+
+  const handleChangeRowsPerPage = (event) => {
+    const newRowsPerPage = parseInt(event.target.value, 10);
+    setRowsPerPage(newRowsPerPage);
+    setPage(0);
+  };
+
+  const rolesArray = Array.isArray(role) ? role : [];
+
+  // Define table columns
+  const columns = [
+    { id: "name", label: "Role Name" },
+    { id: "created_date", label: "Created at", align: "right" },
+    { id: "actions", label: "Actions", align: "right" },
+  ];
+
   return (
-    <Box height="100vh">
-      <TableContainer>
-        <Table aria-label="simple table">
-          <TableHead>
-            <TableRow>
-              <TableCell>
-                {" "}
-                <Button
-                  variant="contained"
-                  sx={{ backgroundColor: "#FF9921", color: "#FFFFFF" }}
-                  onClick={handleClickOpenAdd}
-                >
-                  Add Role
-                </Button>
-              </TableCell>
-              <TableCell align="right"></TableCell>
-              <TableCell align="right">
-                {" "}
-                <Tooltip title="Refresh">
-                  <IconButton>
-                    <Refresh />
-                  </IconButton>
-                </Tooltip>
-                <Tooltip title="Search">
-                  <TextField
-                    variant="outlined"
-                    size="small"
-                    placeholder="Search"
-                    sx={{ mx: 1 }}
-                  />
-                </Tooltip>
-                <Tooltip title="Download">
-                  <IconButton>
-                    <GetApp />
-                  </IconButton>
-                </Tooltip>
-                <Tooltip title="Sort">
-                  <IconButton>
-                    <Sort />
-                  </IconButton>
-                </Tooltip>
-                <Tooltip title="Fullscreen">
-                  <IconButton>
-                    <Fullscreen />
-                  </IconButton>
-                </Tooltip>
-              </TableCell>
-              {/* <TableCell align="right">Actions</TableCell> */}
-            </TableRow>
-            <TableRow>
-              <TableCell>Role Name</TableCell>
-              <TableCell align="right">Created at</TableCell>
-              <TableCell align="right">Actions</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {roles.map((role) => (
-              <TableRow key={role.name}>
-                <TableCell component="th" scope="row">
-                  {role.name}
-                </TableCell>
-                <TableCell align="right">{role.createdAt}</TableCell>
-                <TableCell align="right">
-                  <Tooltip title="Toggle Status">
-                    <FormControlLabel
-                      control={
-                        <Switch
-                          checked={role.status === "Active"}
-                          onChange={() => handleToggleStatus(role.name)}
-                        />
-                      }
-                      label={role.status}
-                    />
-                  </Tooltip>
-                  <Tooltip title="Edit">
-                    <IconButton onClick={() => handleClickOpenUpdate(role)}>
-                      <Visibility />
-                    </IconButton>
-                  </Tooltip>
-                  <Tooltip title="Delete">
-                    <IconButton onClick={() => handleDeleteRole(role)}>
-                      <Delete />
-                    </IconButton>
-                  </Tooltip>
-                </TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
+    <Box sx={{borderWidth:2,borderColor:"red"}}>
+      <Box sx={{display:"flex",justifyContent:"space-between",padding:2}}>
+        {/* button */}
+        <Button
+          variant="contained"
+          sx={{ backgroundColor: "#FF9921", color: "#FFFFFF", mb: 2 }}
+          onClick={handleClickOpenAdd}
+        >
+          Add Role
+        </Button>
+
+        <Box>
+          {" "}
+          <Tooltip title="Refresh">
+            <IconButton>
+              <Refresh />
+            </IconButton>
+          </Tooltip>
+          <Tooltip title="Download">
+            <IconButton>
+              <GetApp />
+            </IconButton>
+          </Tooltip>
+          <Tooltip title="Sort">
+            <IconButton>
+              <Sort />
+            </IconButton>
+          </Tooltip>
+          <Tooltip title="Fullscreen">
+            <IconButton>
+              <Fullscreen />
+            </IconButton>
+          </Tooltip>
+        </Box>
+      </Box>
+
+      <TableComponent
+        data={rolesArray}
+        columns={columns}
+        page={page}
+        rowsPerPage={rowsPerPage}
+        totalRows={rolesArray.length}
+        handleChangePage={handleChangePage}
+        handleChangeRowsPerPage={handleChangeRowsPerPage}
+        onEdit={handleClickOpenUpdate}
+        onDelete={handleDeleteRole}
+        onToggleStatus={handleToggleStatus}
+      />
 
       {/* Add Role Modal */}
-      {/* <Button onClick={handleOpenAdd}>Add Role</Button> */}
       <Dialog open={openAdd} onClose={handleCloseAdd} maxWidth="sm" fullWidth>
         <DialogTitle>Add Role</DialogTitle>
         <DialogContent>
-          <Role onClose={handleCloseAdd} />{" "}
-          {/* Pass the handleClose function */}
+          <Role onClose={handleCloseAdd} />
         </DialogContent>
-        <DialogActions>
-          <Button onClick={handleCloseAdd} color="primary">
-            Cancel
-          </Button>
-        </DialogActions>
       </Dialog>
 
       {/* Update Role Modal */}
