@@ -7,78 +7,74 @@ import {
 import pizzaImage from "../assets/images/pizza-featured.png";
 import MenuItemCard from "../components/MenuItemCard";
 import RelatedOrderCard from "../components/RelatedOrderCard";
+import { useLocation } from "react-router-dom";
 
 const Order = () => {
+  const location = useLocation();
+  const pizza = location.state?.pizza; 
 
-    const exampleMenuItem = {
-      title: "Margherita",
-      price: 50,
-      toppings: [
-        "Extra Cheese",
-        "Olives",
-        "Mushrooms",
-        "Extra Cheese",
-        "Olives"
-      ],
-    };
+  console.log("pizza:",pizza)
 
+  const imageUrl = pizza.photo
+    ? `http://localhost:4000/${pizza.photo.replace(/\\/g, "/")}`
+    : "http://localhost:4000/uploads/placeholder.png";
 
-      const pizzaData = [
-        {
-          id: 1,
-          image:
-            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRS3XIxU32blt_970vLRteGyjKpqUkt452cOc6zuIfI4SCBeWVNZU6MPV_JDL8MTzRUusw&usqp=CAU",
-          name: "Margherita",
-          toppings: ["Cheese", "Tomato"],
-          price: 120,
-          status: "ordered",
-        },
-        {
-          id: 2,
-          image:
-            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRS3XIxU32blt_970vLRteGyjKpqUkt452cOc6zuIfI4SCBeWVNZU6MPV_JDL8MTzRUusw&usqp=CAU",
-          name: "Pepperoni",
-          toppings: ["Pepperoni", "Cheese"],
-          price: 150,
-          status: "ordered",
-        },
-        {
-          id: 2,
-          image:
-            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRS3XIxU32blt_970vLRteGyjKpqUkt452cOc6zuIfI4SCBeWVNZU6MPV_JDL8MTzRUusw&usqp=CAU",
-          name: "Pepperoni",
-          toppings: ["Pepperoni", "Cheese"],
-          price: 150,
-          status: "recieved",
-        },
-        {
-          id: 2,
-          image:
-            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRS3XIxU32blt_970vLRteGyjKpqUkt452cOc6zuIfI4SCBeWVNZU6MPV_JDL8MTzRUusw&usqp=CAU",
-          name: "Pepperoni",
-          toppings: ["Pepperoni", "Cheese"],
-          price: 150,
-          status: "recieved",
-        },
-        {
-          id: 2,
-          image:
-            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRS3XIxU32blt_970vLRteGyjKpqUkt452cOc6zuIfI4SCBeWVNZU6MPV_JDL8MTzRUusw&usqp=CAU",
-          name: "Pepperoni",
-          toppings: ["Pepperoni", "Cheese"],
-          price: 150,
-          status: "recieved",
-        },
-        {
-          id: 2,
-          image:
-            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRS3XIxU32blt_970vLRteGyjKpqUkt452cOc6zuIfI4SCBeWVNZU6MPV_JDL8MTzRUusw&usqp=CAU",
-          name: "Pepperoni",
-          toppings: ["Pepperoni", "Cheese"],
-          price: 150,
-          status: "recieved",
-        },
-      ];
+  const pizzaData = [
+    {
+      id: 1,
+      image:
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRS3XIxU32blt_970vLRteGyjKpqUkt452cOc6zuIfI4SCBeWVNZU6MPV_JDL8MTzRUusw&usqp=CAU",
+      name: "Margherita",
+      toppings: ["Cheese", "Tomato"],
+      price: 120,
+      status: "ordered",
+    },
+    {
+      id: 2,
+      image:
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRS3XIxU32blt_970vLRteGyjKpqUkt452cOc6zuIfI4SCBeWVNZU6MPV_JDL8MTzRUusw&usqp=CAU",
+      name: "Pepperoni",
+      toppings: ["Pepperoni", "Cheese"],
+      price: 150,
+      status: "ordered",
+    },
+    {
+      id: 2,
+      image:
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRS3XIxU32blt_970vLRteGyjKpqUkt452cOc6zuIfI4SCBeWVNZU6MPV_JDL8MTzRUusw&usqp=CAU",
+      name: "Pepperoni",
+      toppings: ["Pepperoni", "Cheese"],
+      price: 150,
+      status: "recieved",
+    },
+    {
+      id: 2,
+      image:
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRS3XIxU32blt_970vLRteGyjKpqUkt452cOc6zuIfI4SCBeWVNZU6MPV_JDL8MTzRUusw&usqp=CAU",
+      name: "Pepperoni",
+      toppings: ["Pepperoni", "Cheese"],
+      price: 150,
+      status: "recieved",
+    },
+    {
+      id: 2,
+      image:
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRS3XIxU32blt_970vLRteGyjKpqUkt452cOc6zuIfI4SCBeWVNZU6MPV_JDL8MTzRUusw&usqp=CAU",
+      name: "Pepperoni",
+      toppings: ["Pepperoni", "Cheese"],
+      price: 150,
+      status: "recieved",
+    },
+    {
+      id: 2,
+      image:
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRS3XIxU32blt_970vLRteGyjKpqUkt452cOc6zuIfI4SCBeWVNZU6MPV_JDL8MTzRUusw&usqp=CAU",
+      name: "Pepperoni",
+      toppings: ["Pepperoni", "Cheese"],
+      price: 150,
+      status: "recieved",
+    },
+  ];
 
   return (
     <Box
@@ -104,7 +100,6 @@ const Order = () => {
         }}
       >
         <Box sx={{ display: "flex", gap: 5 }}>
-
           {/*large images */}
           <Box
             sx={{
@@ -118,7 +113,7 @@ const Order = () => {
             }}
           >
             <Avatar
-              src={pizzaImage}
+              src={imageUrl}
               sx={{ width: "85%", height: "95%", alignSelf: "center" }}
             />
           </Box>
@@ -137,7 +132,7 @@ const Order = () => {
               }}
             >
               <Avatar
-                src={pizzaImage}
+                src={imageUrl}
                 sx={{ width: "85%", height: "95%", alignSelf: "center" }}
               />
             </Box>
@@ -153,17 +148,17 @@ const Order = () => {
               }}
             >
               <Avatar
-                src={pizzaImage}
+                src={imageUrl}
                 sx={{ width: "85%", height: "95%", alignSelf: "center" }}
               />
             </Box>
           </Box>
         </Box>
 
-        <MenuItemCard menuItem={exampleMenuItem} />
+        <MenuItemCard menuItem={pizza} />
       </Box>
-          
-          {/*  RELATED  CUSTOMER OREDERS  */}
+
+      {/*  RELATED  CUSTOMER OREDERS  */}
       <Box
         sx={{
           background: "#FFF8F1",

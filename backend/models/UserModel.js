@@ -49,11 +49,6 @@ const getAdmins = async () => {
   return result.rows;
 };
 
-const getMenu = async () => {
-  const result = await pool.query("SELECT * FROM menu");
-  return result.rows;
-};
-
 
 
 module.exports = {
@@ -62,5 +57,5 @@ module.exports = {
   getAdmins,
   getCustomerByEmail,
   createCustomer,
-  getMenu,
+  // getMenu,
 };

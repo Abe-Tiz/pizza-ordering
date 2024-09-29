@@ -1,5 +1,5 @@
 
-const { addRole } = require("../models/RoleModel");
+const { addRole, getRole } = require("../models/RoleModel");
 const { ZodError } = require("zod");
 const { roleSchema } = require("../zod/Validation");
 
@@ -23,6 +23,16 @@ const createRole = async (req, res) => {
   }
 };
 
+const displayRole = async (req, res) => {
+  try {
+    const role = await getRole();
+    res.status(200).json(role);
+  } catch (error) {
+    res.status(500).json(error);
+  }
+};
+
 module.exports = {
   createRole,
+  displayRole,
 };

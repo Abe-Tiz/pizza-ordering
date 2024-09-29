@@ -13,6 +13,12 @@ const addMenuItem = async (name, toppings, price, photo) => {
   return newMenu.rows[0];
 };
 
+const getMenu = async () => {
+  const result = await pool.query("SELECT * FROM menu");
+  return result.rows;
+};
+
 module.exports = {
   addMenuItem,
+  getMenu,
 };

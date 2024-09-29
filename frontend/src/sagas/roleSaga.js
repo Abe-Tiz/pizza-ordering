@@ -4,6 +4,9 @@ import {
   addRoleFailure,
   addRoleRequest,
   addRoleSuccess,
+  fetchRoleFailure,
+  fetchRoleRequest,
+  fetchRoleSuccess,
 } from "../redux/roleSlice";
 
 // add role 
@@ -32,4 +35,19 @@ function* addRole(action) {
 
 export function* watchAddRole() {
   yield takeLatest(addRoleRequest.type, addRole);
+}
+
+// display roles
+function* displayRole() {
+  try {
+    const response = yield call(axios.get, "http://localhost:4000/role/view-role")
+    const data = response.data;
+    yield put(fetchRoleSuccess(data));
+  } catch (error) {
+    yield put(fetchRoleFailure(error.message));
+  }
+}
+
+export function* watchDisplayRole(){
+  yield takeLatest(fetchRoleRequest.type,displayRole)
 }

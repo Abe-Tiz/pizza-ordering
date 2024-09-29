@@ -1,17 +1,14 @@
 import { Box, Button, TextField, Typography } from "@mui/material";
 import React, { useState } from "react";
 import { Grid } from "@mui/material";
-import { useSelector, useDispatch } from "react-redux";
-
-import { addRoleRequest } from "../../redux/roleSlice";
+import { useDispatch } from "react-redux";
+import { addRoleRequest } from "../../redux/roleSlice"; // Adjust the import according to your project structure
 import CustomCheckbox from "./CustomeCheckBox";
 import { roleSchema } from "../../validation/Validation";
 
-const Role = () => {
+const Role = ({ onClose }) => {
+  // Accept onClose prop to close the modal
   const dispatch = useDispatch();
-  // const { role, error, loading } = useSelector((state) => state.role);
-  // console.log("role:", role, error, loading);
-
   const [formData, setFormData] = useState({
     name: "",
     permission: [],
@@ -33,10 +30,8 @@ const Role = () => {
     }));
   };
 
-
   const handlePermissionChange = (e) => {
     const { checked, value } = e.target;
-
     setFormData((prevData) => ({
       ...prevData,
       permission: checked
@@ -48,23 +43,22 @@ const Role = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const result = roleSchema.safeParse(formData);
-
     if (!result.success) {
       console.error(result.error.errors);
       return;
     }
-     const { data } = result;
-     console.log("Validated data:", data);
+    const { data } = result;
+    console.log("Validated data:", data);
     dispatch(addRoleRequest(data));
+    onClose(); // Close the modal after submission
   };
 
   return (
     <Box
       sx={{
-        padding: "3rem 15rem",
+        padding: "3rem",
         display: "flex",
         justifyContent: "center",
-        height: "100vh",
         alignItems: "start",
       }}
     >
@@ -82,7 +76,7 @@ const Role = () => {
           onChange={handleChange}
         />
         <Typography sx={{ color: "gray" }}>Permissions</Typography>
-        <Grid container spacing={2} sx={{ width: "100%" }} >
+        <Grid container spacing={2} sx={{ width: "100%" }}>
           {permissions.map((permission, index) => (
             <Grid item xs={4} key={index}>
               <CustomCheckbox

@@ -1,7 +1,7 @@
 import { all } from "redux-saga/effects";
 import { customerSaga, loginCustomerSaga, registerAdminSaga, userSaga, watchFetchRestaurant } from "./userSaga";
 import { watchAddMenuItem, watchFetchMenu } from "./menuSaga";
-import { watchAddRole } from "./roleSaga";
+import { watchAddRole, watchDisplayRole } from "./roleSaga";
 
 
 export default function* rootSaga() {
@@ -17,6 +17,7 @@ export default function* rootSaga() {
         watchAddMenuItem(),
 
         // role
-        watchAddRole()
+        watchAddRole(),
+        watchDisplayRole()
     ])
 }

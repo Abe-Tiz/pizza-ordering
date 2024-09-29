@@ -1,11 +1,13 @@
-import { Box, Typography, Avatar } from "@mui/material";
+import { Box, Typography, Avatar, Button } from "@mui/material";
 import React from "react";
- import Button from "./Button";
+//  import Button from "./Button";
+import { useNavigate } from 'react-router-dom';
 
-const PizzaCard = ({ pizza,user}) => {
-  console.log("users:",user);
-  // const imageUrl = `http://localhost:4000/${pizza.photo.replace(/\\/g, "/")}`; 
-
+const PizzaCard = ({ pizza, user }) => {
+  const navigate = useNavigate()
+  const handleOrderClick = () => {
+    navigate("/customer-order", { state: { pizza } }); // Navigate and pass the pizza data
+  };
    const imageUrl = pizza.photo
      ? `http://localhost:4000/${pizza.photo.replace(/\\/g, "/")}`
      : "http://localhost:4000/uploads/placeholder.png";
@@ -62,7 +64,7 @@ const PizzaCard = ({ pizza,user}) => {
           justifyContent: "space-between",
           borderBottom: 1,
           borderBottomColor: "gray",
-          padding:2
+          padding: 2,
         }}
       >
         <Typography
@@ -80,7 +82,18 @@ const PizzaCard = ({ pizza,user}) => {
           </Typography>
         </Typography>
         {/* <Box> */}
-          <Button title="Order" path="/register" />
+        <Button
+          color="inherit"
+          sx={{
+            backgroundColor: "#FF890F",
+            color: "white",
+            padding: "10px 20px",
+            width: "6rem",
+            borderRadius: "15px",
+            alignItems: "center",
+          }}
+          onClick={handleOrderClick}
+        >Order</Button>
         {/* </Box> */}
       </Box>
 

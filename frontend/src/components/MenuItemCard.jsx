@@ -41,6 +41,8 @@ const MenuItemCard = ({ menuItem }) => {
     setOpenModal(false);  
   };
 
+  console.log("menu:",menuItem)
+
   return (
     <Box
       sx={{
@@ -50,7 +52,7 @@ const MenuItemCard = ({ menuItem }) => {
         width: 400,
       }}
     >
-      <Typography variant="h4">{menuItem.title}</Typography>
+      <Typography variant="h4">{menuItem.name}</Typography>
       <Box>
         {menuItem.toppings.map((topping) => (
           <CustomCheckbox

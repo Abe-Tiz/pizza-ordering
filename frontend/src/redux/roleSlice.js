@@ -5,11 +5,11 @@ const roleSlice = createSlice({
   initialState: {
     role: {
       name: "",
-      permission: []
+      permission: [],
     },
     loading: false,
-    error: null, 
-  },   
+    error: null,
+  },
   reducers: {
     addRoleRequest: (state) => {
       state.loading = true;
@@ -23,9 +23,31 @@ const roleSlice = createSlice({
       state.loading = false;
       state.error = action.payload;
     },
+
+    // fetch roles
+    fetchRoleRequest: (state) => {
+      state.loading = true;
+      state.error = null;
+    },
+    fetchRoleSuccess: (state, action) => {
+      state.loading = false;
+      state.role = action.payload;
+      console.log("roles:", state.role);
+    },
+    fetchRoleFailure: (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    },
   },
 });
 
-export const { addRoleRequest, addRoleSuccess, addRoleFailure } = roleSlice.actions;
+export const {
+  addRoleRequest,
+  addRoleSuccess,
+  addRoleFailure,
+  fetchRoleRequest,
+  fetchRoleSuccess,
+  fetchRoleFailure,
+} = roleSlice.actions;
 
 export default roleSlice.reducer;

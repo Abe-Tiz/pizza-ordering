@@ -40,8 +40,8 @@ const initialRoles = [
 const ViewRole = () => {
   const [openAdd, setOpenAdd] = useState(false);
   const [openUpdate, setOpenUpdate] = useState(false);
-  const [roles, setRoles] = useState(initialRoles); // State to manage roles
-  const [selectedRole, setSelectedRole] = useState(null); // State to manage the selected role for updating
+  const [roles, setRoles] = useState(initialRoles);  
+  const [selectedRole, setSelectedRole] = useState(null);  
 
   const handleClickOpenAdd = () => {
     setOpenAdd(true);
@@ -96,7 +96,7 @@ const ViewRole = () => {
                 {" "}
                 <Button
                   variant="contained"
-                  sx={{ backgroundColor: "#FF9921",color:"#FFFFFF" }}
+                  sx={{ backgroundColor: "#FF9921", color: "#FFFFFF" }}
                   onClick={handleClickOpenAdd}
                 >
                   Add Role
@@ -179,16 +179,17 @@ const ViewRole = () => {
       </TableContainer>
 
       {/* Add Role Modal */}
+      {/* <Button onClick={handleOpenAdd}>Add Role</Button> */}
       <Dialog open={openAdd} onClose={handleCloseAdd} maxWidth="sm" fullWidth>
         <DialogTitle>Add Role</DialogTitle>
         <DialogContent>
-          <Role />
+          <Role onClose={handleCloseAdd} />{" "}
+          {/* Pass the handleClose function */}
         </DialogContent>
         <DialogActions>
           <Button onClick={handleCloseAdd} color="primary">
             Cancel
           </Button>
-          <Button color="primary">Add</Button>
         </DialogActions>
       </Dialog>
 
