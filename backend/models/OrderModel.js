@@ -20,12 +20,12 @@ const addOrderItem = async (name, toppings, price, photo, quantity, status) => {
   return newOrder.rows[0];
 };
 
-// const getMenu = async () => {
-//   const result = await pool.query("SELECT * FROM menu");
-//   return result.rows;
-// };
+const getOrder = async () => {
+  const result = await pool.query(`SELECT * FROM "order"`);
+  return result.rows;
+};
 
 module.exports = {
   addOrderItem,
-  //   getMenu,
+  getOrder,
 };

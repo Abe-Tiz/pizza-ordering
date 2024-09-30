@@ -1,7 +1,7 @@
-const { addOrderItem } = require("../models/OrderModel");
+const { addOrderItem, getOrder } = require("../models/OrderModel");
 
 const createOrderItem = async (req, res) => {
-     console.log("Request Body:", req.body); 
+    //  console.log("Request Body:", req.body); 
   const { name, toppings, price,photo, quantity,status } = req.body;
     if (!name) {
      console.log({ error: "Name is required" })
@@ -17,6 +17,17 @@ const createOrderItem = async (req, res) => {
   }
 };
 
-module.exports = {
-    createOrderItem
+const displayOrder = async (req, res) => {
+    try {
+        const order = await getOrder();
+        res.status(200).json(order);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: error.message });
+    }
 }
+
+module.exports = {
+  createOrderItem,
+  displayOrder,
+};
