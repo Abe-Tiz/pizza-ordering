@@ -7,6 +7,7 @@ const cors = require("cors");
 const userRoutes = require("./routes/UserRoute");
 const menuRoutes = require("./routes/MenuRoute");
 const roleRoutes = require("./routes/RoleRoute");
+const orderRoutes = require("./routes/OrderRoute");
 
 const { checkConnection } = require("./config/Db");
 require("dotenv").config();
@@ -23,6 +24,7 @@ checkConnection();
 app.use("/user", userRoutes);
 app.use("/menu", menuRoutes);
 app.use("/role", roleRoutes);
+app.use("/order", orderRoutes);
 
 
 // Start the server

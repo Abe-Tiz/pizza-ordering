@@ -1,17 +1,16 @@
 import React, { useState } from "react";
-import {
-  Box,
-  Typography,
-  Button,
-} from "@mui/material";
+import { Box, Typography, Button } from "@mui/material";
 import CustomCheckbox from "../pages/dashboard/CustomeCheckBox";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import SuccessMessage from "./SuccessMessage";
+import { useDispatch } from "react-redux";
+import { addOrderItemRequest } from "../redux/orderSlice";
 
 const MenuItemCard = ({ menuItem }) => {
   const [quantity, setQuantity] = useState(1);
   const [selectedToppings, setSelectedToppings] = useState([]);
-  const [openModal, setOpenModal] = useState(false);  
+  const [openModal, setOpenModal] = useState(false);
+  const dispatch = useDispatch();
 
   const handleToppingChange = (topping) => {
     setSelectedToppings((prev) => {
@@ -34,24 +33,26 @@ const MenuItemCard = ({ menuItem }) => {
   const totalPrice = quantity * menuItem.price;
 
   const handleOrderClick = () => {
-    setOpenModal(true); 
+    const orderData = {
+      name: menuItem.name,
+      toppings: selectedToppings,
+      price: Number(totalPrice),
+      photo: menuItem.photo,
+      quantity: Number(quantity),
+      status: "Pending",  
+    };
+
+    dispatch(addOrderItemRequest(orderData));
+    console.log("Order Item:", orderData);
+    // setOpenModal(true);
   };
 
   const handleCloseModal = () => {
-    setOpenModal(false);  
+    setOpenModal(false);
   };
 
-  console.log("menu:",menuItem)
-
   return (
-    <Box
-      sx={{
-        display: "flex",
-        flexDirection: "column",
-        gap: 2,
-        width: 400,
-      }}
-    >
+    <Box sx={{ display: "flex", flexDirection: "column", gap: 2, width: 400 }}>
       <Typography variant="h4">{menuItem.name}</Typography>
       <Box>
         {menuItem.toppings.map((topping) => (
@@ -109,7 +110,6 @@ const MenuItemCard = ({ menuItem }) => {
         Order
         <ArrowForwardIcon sx={{ marginLeft: 1, transform: "rotate(-50deg)" }} />
       </Button>
-
       {/* Success Modal */}
       <SuccessMessage open={openModal} onClose={handleCloseModal} />
     </Box>
