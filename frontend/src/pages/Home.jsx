@@ -1,10 +1,10 @@
-import React from 'react'
-import TopRestorants from '../components/TopRestorants'
-import Hero from '../components/Hero';
-import Featured from '../components/Featured';
-import PopularPizza from '../components/PopularPizza';
-import FastingPizza from '../components/FastingPizza';
-import Footer from '../components/Footer';
+import React from "react";
+import TopRestorants from "../components/TopRestorants";
+import Hero from "../components/Hero";
+import Featured from "../components/Featured";
+import PopularPizza from "../components/PopularPizza";
+import FastingPizza from "../components/FastingPizza";
+import Footer from "../components/Footer";
 
 const Home = () => {
   return (
@@ -17,6 +17,6 @@ const Home = () => {
       <Footer />
     </>
   );
-}
+};
 
-export default Home
+export default Home;

@@ -69,7 +69,7 @@ const Featured = () => {
       <Typography variant="h3" sx={{ color: "gray", marginBottom: "1.5rem" }}>
         Featured Pizza
       </Typography>
-      <Slider {...settings} rtl={direction === "right"}>
+      <Slider {...settings} rtl={direction === "left" }>
         <Box style={{ margin: "0 15px", width: "300px", height: "400px" }}>
           <FeaturedPizza background="#50482B" />
         </Box>

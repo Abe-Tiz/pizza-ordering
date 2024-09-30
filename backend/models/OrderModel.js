@@ -21,7 +21,11 @@ const addOrderItem = async (
 };
 
 const getOrder = async () => {
-  const result = await pool.query(`SELECT * FROM "order"`);
+  const result = await pool.query(`
+    SELECT o.*, c.phone
+    FROM "order" o
+    JOIN "customer" c ON o.customer_id = c.id
+  `);
   return result.rows;
 };
 

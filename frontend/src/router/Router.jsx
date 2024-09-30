@@ -14,6 +14,7 @@ import Role from "../pages/dashboard/Role";
 import ViewRole from "../pages/role/ViewRole";
 import Order from "../pages/Order";
 import ProtectedRoute from "../private/ProtectedRoute";
+import ViewOrder from "../pages/order/ViewOrder";
   
 const router = createBrowserRouter([
   {
@@ -69,6 +70,10 @@ const router = createBrowserRouter([
       {
         path: "view-role",
         element: <ViewRole />,
+      },
+      {
+        path: "view-order",
+        element: <ViewOrder />,
       },
     ],
   },

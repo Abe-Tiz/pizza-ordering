@@ -55,6 +55,7 @@ const Order = () => {
         }}
       >
         <Box sx={{ display: "flex", gap: 5 }}>
+         
           {/* Large image */}
           <Box
             sx={{

@@ -47,7 +47,10 @@ const AdminSider = () => {
           marginTop: 4,
         }}
       >
-        <NavLink style={{ padding: ".1em 2em" }} to="/admin-dashboard/ordered">
+        <NavLink
+          style={{ padding: ".1em 2em" }}
+          to="/admin-dashboard/view-order"
+        >
           Orders
         </NavLink>
         <NavLink style={{ padding: ".1em 2em" }} to="/admin-dashboard">

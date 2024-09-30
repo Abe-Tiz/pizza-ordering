@@ -1,7 +1,12 @@
-import { Box, Typography, Avatar, Grid } from "@mui/material";
+import { Box, Typography, Avatar} from "@mui/material";
 import React from "react";
 
 const RelatedOrderCard = ({ pizza }) => {
+    const imageUrl = pizza?.photo
+      ? `http://localhost:4000/${pizza.photo.replace(/\\/g, "/")}`
+    : "http://localhost:4000/uploads/placeholder.png";   
+  
+  
   return (
     <Box
       sx={{
@@ -10,7 +15,7 @@ const RelatedOrderCard = ({ pizza }) => {
         flexDirection: "column",
         borderRadius: 3,
         justifyContent: "center",
-        alignItems:"center"
+        alignItems: "center",
       }}
     >
       <Box
@@ -26,7 +31,7 @@ const RelatedOrderCard = ({ pizza }) => {
       >
         {" "}
         <Avatar
-          src={pizza.image}
+          src={imageUrl}
           sx={{ width: "85%", height: "85%", alignSelf: "center" }}
         />
       </Box>
