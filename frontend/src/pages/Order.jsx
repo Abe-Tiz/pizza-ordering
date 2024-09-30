@@ -2,18 +2,30 @@ import React, { useEffect, useState } from "react";
 import { Box, Avatar, Typography } from "@mui/material";
 import MenuItemCard from "../components/MenuItemCard";
 import RelatedOrderCard from "../components/RelatedOrderCard";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchSpecificOrderRequest } from "../redux/orderSlice";
 
 const Order = () => {
   const [pizza, setPizza] = useState(null);
+  const dispatch = useDispatch();
+  const { order, error, loading } = useSelector((state) => state.order);
+  console.log("order selector:",order)
 
   useEffect(() => {
+    const logedinCustomer = localStorage.getItem("customer-data")
+      ? JSON.parse(localStorage.getItem("customer-data"))
+      : null;
+
+    if (logedinCustomer) {
+      dispatch(fetchSpecificOrderRequest(logedinCustomer.id));
+    }
     const storedPizza = JSON.parse(localStorage.getItem("pizza-data"));
     if (storedPizza) {
       setPizza(storedPizza);
     }
-  }, []);
+  }, [dispatch]);
 
-  console.log("pizza order:", pizza);
+  // console.log("pizza order:", pizza);
 
   // Check if pizza is loaded before accessing its properties
   const imageUrl = pizza?.photo
@@ -137,7 +149,7 @@ const Order = () => {
             marginBottom: "1.5rem",
           }}
         >
-          Related
+          Customer Related Orders
         </Typography>
         <Box
           sx={{
@@ -154,7 +166,7 @@ const Order = () => {
         >
           <Box sx={{ display: "flex", flexWrap: "nowrap", gap: "10px" }}>
             {Array.isArray(pizzaData) &&
-              pizzaData.map((relatedPizza, index) => (
+              order.map((relatedPizza, index) => (
                 <Box
                   key={index}
                   sx={{

@@ -21,15 +21,20 @@ const addOrderItem = async (
 };
 
 const getOrder = async () => {
-  const result = await pool.query(`
-    SELECT o.*, c.*
-    FROM "order" o
-    JOIN "customer" c ON o.customer_id = c.id
-  `);
+  const result = await pool.query(`SELECT * FROM "order"`);
+  return result.rows;
+};
+
+const getSpecificOrder = async (customer_id) => {
+  const result = await pool.query(
+    `SELECT * FROM "order" WHERE customer_id = $1`,
+    [customer_id]
+  );
   return result.rows;
 };
 
 module.exports = {
   addOrderItem,
   getOrder,
+  getSpecificOrder,
 };

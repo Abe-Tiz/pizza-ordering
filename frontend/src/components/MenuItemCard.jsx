@@ -12,7 +12,12 @@ const MenuItemCard = ({ menuItem }) => {
   const [openModal, setOpenModal] = useState(false);
   const dispatch = useDispatch();
 
-    const logedinCustomer =JSON.parse(localStorage.getItem("customer-data"));
+    const logedinCustomer = localStorage.getItem("customer-data")
+      ? JSON.parse(localStorage.getItem("customer-data"))
+    : null;
+  
+  // console.log("customer:", logedinCustomer);
+  // console.log("customer id:", logedinCustomer.id);
 
   const handleToppingChange = (topping) => {
     setSelectedToppings((prev) => {
@@ -34,7 +39,14 @@ const MenuItemCard = ({ menuItem }) => {
 
   const totalPrice = quantity * menuItem.price;
 
+  // handle order
   const handleOrderClick = () => {
+
+    if (!logedinCustomer) {
+      console.error("Customer data is not available");
+      return;
+    }
+       
     const orderData = {
       name: menuItem.name,
       toppings: selectedToppings,

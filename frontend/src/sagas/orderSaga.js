@@ -6,6 +6,9 @@ import {
   fetchOrderFailure,
   fetchOrderRequest,
   fetchOrderSuccess,
+  fetchSpecificOrderFailure,
+  fetchSpecificOrderRequest,
+  fetchSpecificOrderSuccess,
 } from "../redux/orderSlice";
 import axios from "axios";
 
@@ -21,16 +24,16 @@ function* addOrderItem(action) {
   // formData.append("price", price);
   // formData.append("photo", photo);
   // formData.append("quantity", quantity);
-  // formData.append("status", "Pending"); 
+  // formData.append("status", "Pending");
 
-//  console.log("Response data:", action.payload);
+  //  console.log("Response data:", action.payload);
   try {
     const response = yield call(
       axios.post,
       "http://localhost:4000/order",
       action.payload
     );
-    console.log("Response data:", response.data);
+    // console.log("Response data:", response.data);
     yield put(addOrderItemSuccess(response.data));
   } catch (error) {
     yield put(addOrderItemFailure(error.message));
@@ -41,11 +44,13 @@ export function* watchAddOrder() {
   yield takeLatest(addOrderItemRequest.type, addOrderItem);
 }
 
-
 // fetch order
 function* fetchOrderSaga() {
   try {
-    const response = yield call(axios.get, "http://localhost:4000/order/get-order");
+    const response = yield call(
+      axios.get,
+      "http://localhost:4000/order/get-order"
+    );
     const data = yield response.data;
     yield put(fetchOrderSuccess(data));
   } catch (error) {
@@ -55,4 +60,23 @@ function* fetchOrderSaga() {
 
 export function* watchFetchOrder() {
   yield takeLatest(fetchOrderRequest.type, fetchOrderSaga);
+}
+// fetch specific order
+function* fetchSpecificOrderSaga(action) {
+  try {
+    const response = yield call(
+      axios.post,
+      "http://localhost:4000/order/get-customer-order",
+       { customer_id: action.payload }
+    );
+    // const data = yield response.data;
+    console.log("specific order saga:", action.payload);
+    yield put(fetchSpecificOrderSuccess(response.data));
+  } catch (error) {
+    yield put(fetchSpecificOrderFailure(error.message));
+  }
+}
+
+export function* watchSpecificFetchOrder() {
+  yield takeLatest(fetchSpecificOrderRequest.type, fetchSpecificOrderSaga);
 }

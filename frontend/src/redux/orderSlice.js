@@ -10,7 +10,7 @@ const orderSlice = createSlice({
       photo: "",
       quantity: 0,
       status: "",
-      customer_id:0,
+      customer_id: 0,
     },
     loading: false,
     error: null,
@@ -43,6 +43,21 @@ const orderSlice = createSlice({
       state.loading = false;
       state.error = action.payload;
     },
+
+    // fetch individual customer order
+    fetchSpecificOrderRequest: (state,action) => {
+      state.loading = true;
+      state.error = null;
+    },
+    fetchSpecificOrderSuccess: (state, action) => {
+      state.loading = false;
+      state.order = action.payload;
+      // console.log("slice:", action.payload);
+    },
+    fetchSpecificOrderFailure: (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    },
   },
 });
 
@@ -53,6 +68,9 @@ export const {
   fetchOrderRequest,
   fetchOrderSuccess,
   fetchOrderFailure,
+  fetchSpecificOrderRequest,
+  fetchSpecificOrderSuccess,
+  fetchSpecificOrderFailure,
 } = orderSlice.actions;
 
 export default orderSlice.reducer;
