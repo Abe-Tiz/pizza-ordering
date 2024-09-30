@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Box, Typography, Button } from "@mui/material";
 import CustomCheckbox from "../pages/dashboard/CustomeCheckBox";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
@@ -11,6 +11,8 @@ const MenuItemCard = ({ menuItem }) => {
   const [selectedToppings, setSelectedToppings] = useState([]);
   const [openModal, setOpenModal] = useState(false);
   const dispatch = useDispatch();
+
+    const logedinCustomer =JSON.parse(localStorage.getItem("customer-data"));
 
   const handleToppingChange = (topping) => {
     setSelectedToppings((prev) => {
@@ -39,12 +41,12 @@ const MenuItemCard = ({ menuItem }) => {
       price: Number(totalPrice),
       photo: menuItem.photo,
       quantity: Number(quantity),
-      status: "Pending",  
+      status: "Pending",
+      customer_id: logedinCustomer.id,
     };
 
     dispatch(addOrderItemRequest(orderData));
-    console.log("Order Item:", orderData);
-    // setOpenModal(true);
+    setOpenModal(true);
   };
 
   const handleCloseModal = () => {

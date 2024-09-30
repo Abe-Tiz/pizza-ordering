@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Box,
   TextField,
@@ -14,45 +14,46 @@ import {
 import pizzaLogo from "../../assets/images/pizza-logo.png";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { z } from "zod";
 import { CUSTOMER_LOGIN_REQUEST } from "../../redux/userSlice";
 
 const Login = () => {
-    const dispatch = useDispatch();
-    const navigate = useNavigate();
-    const [formData, setFormData] = useState({
-      email: "",
-      password: "",
-      location: "",
-      phone: "",
-    });
-    const { customer, error, loading } = useSelector((state) => state.user);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
+  const { customer, error, loading } = useSelector((state) => state.user);
 
-    // console.log("users:", customer.token, error, loading);
-
-    // Handle change in input fields
-    const handleChange = (e) => {
-      const { name, value } = e.target;
-      setFormData((prevData) => ({
-        ...prevData,
-        [name]: value,
-      }));
-    };
-
-    // Handle submit
-    const handleSubmit = async (e) => {
-      e.preventDefault();
-      try {
-        dispatch(CUSTOMER_LOGIN_REQUEST(formData));
-        if (!error && !loading) {
-          localStorage.setItem("customer-login", customer.token);
-          navigate("/customer-order");
-        }
-      } catch (error) {
-        console.log(error);
-      }
-  };
   
+  useEffect(() => {
+    dispatch(CUSTOMER_LOGIN_REQUEST(formData))
+  },[dispatch])
+
+
+  console.log("logged:", customer);
+  
+  // Handle change in input fields
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+
+ 
+  // Handle submit
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+        localStorage.setItem("customer-login", JSON.stringify(customer.token)); 
+        localStorage.setItem("customer-data", JSON.stringify(customer.user));  
+        navigate("/customer-order"); 
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <Box
@@ -81,7 +82,6 @@ const Login = () => {
           style={{ width: 300, height: "auto" }}
         />
       </Box>
-
       {/* Right Section */}
       <Box
         sx={{
@@ -129,7 +129,6 @@ const Login = () => {
         >
           Login
         </Typography>
-
         <form onSubmit={handleSubmit}>
           <FormGroup
             sx={{

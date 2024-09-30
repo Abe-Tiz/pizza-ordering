@@ -5,17 +5,15 @@ import {
   Dialog,
   DialogTitle,
   DialogContent,
-  DialogActions,
-  Tooltip,
-  IconButton,
 } from "@mui/material";
-import { Refresh, GetApp, Sort, Fullscreen } from "@mui/icons-material";
+// import { Refresh, GetApp, Sort, Fullscreen } from "@mui/icons-material";
 // import ReusableTable from "./ReusableTable"; // Import the reusable table component
-import Role from "../dashboard/Role"; // Adjust the import path as necessary
+import Role from "../dashboard/Role";  
 import UpdateRole from "./UpdateRole";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchRoleRequest } from "../../redux/roleSlice";
 import TableComponent from "../../components/TableComponent";
+import TableHeaderComponent from "../../components/TableHeaderComponent";
 
 const ViewRole = () => {
   const [openAdd, setOpenAdd] = useState(false);
@@ -91,29 +89,7 @@ const ViewRole = () => {
           Add Role
         </Button>
 
-        <Box>
-          {" "}
-          <Tooltip title="Refresh">
-            <IconButton>
-              <Refresh />
-            </IconButton>
-          </Tooltip>
-          <Tooltip title="Download">
-            <IconButton>
-              <GetApp />
-            </IconButton>
-          </Tooltip>
-          <Tooltip title="Sort">
-            <IconButton>
-              <Sort />
-            </IconButton>
-          </Tooltip>
-          <Tooltip title="Fullscreen">
-            <IconButton>
-              <Fullscreen />
-            </IconButton>
-          </Tooltip>
-        </Box>
+        <TableHeaderComponent />
       </Box>
 
       <TableComponent

@@ -5,9 +5,16 @@ import { useNavigate } from 'react-router-dom';
 
 const PizzaCard = ({ pizza, user }) => {
   const navigate = useNavigate()
+
   const handleOrderClick = () => {
-    navigate("/customer-order", { state: { pizza } }); // Navigate and pass the pizza data
-  };
+   localStorage.setItem("pizza-data", JSON.stringify(pizza));
+   const isAuthenticated = !!localStorage.getItem("customer-login");
+   if (isAuthenticated) {
+     navigate("/customer-order", { state: { pizza } });
+   } else {
+     navigate("/login"); 
+   }
+ };
    const imageUrl = pizza.photo
      ? `http://localhost:4000/${pizza.photo.replace(/\\/g, "/")}`
      : "http://localhost:4000/uploads/placeholder.png";

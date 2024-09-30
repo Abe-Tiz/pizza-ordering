@@ -34,6 +34,13 @@ const getCustomerByEmail = async (email) => {
   ]);
   return result.rows[0];
 };
+// get customer by id
+const getCustomerById = async (customer_id) => {
+  const result = await pool.query("SELECT * FROM customer WHERE customer_id = $1", [
+    customer_id,
+  ]);
+  return result.rows[0];
+};
 
 // get user
 const getUserByEmail = async (email) => {
@@ -57,5 +64,5 @@ module.exports = {
   getAdmins,
   getCustomerByEmail,
   createCustomer,
-  // getMenu,
+  getCustomerById,
 };

@@ -1,24 +1,26 @@
-import React from "react";
-import {
-  Box,
-  Avatar,
-  Typography,
-} from "@mui/material";
-import pizzaImage from "../assets/images/pizza-featured.png";
+import React, { useEffect, useState } from "react";
+import { Box, Avatar, Typography } from "@mui/material";
 import MenuItemCard from "../components/MenuItemCard";
 import RelatedOrderCard from "../components/RelatedOrderCard";
-import { useLocation } from "react-router-dom";
 
 const Order = () => {
-  const location = useLocation();
-  const pizza = location.state?.pizza; 
+  const [pizza, setPizza] = useState(null);
 
-  console.log("pizza:",pizza)
+  useEffect(() => {
+    const storedPizza = JSON.parse(localStorage.getItem("pizza-data"));
+    if (storedPizza) {
+      setPizza(storedPizza);
+    }
+  }, []);
 
-  const imageUrl = pizza.photo
+  console.log("pizza order:", pizza);
+
+  // Check if pizza is loaded before accessing its properties
+  const imageUrl = pizza?.photo
     ? `http://localhost:4000/${pizza.photo.replace(/\\/g, "/")}`
     : "http://localhost:4000/uploads/placeholder.png";
 
+  // Sample related pizza data
   const pizzaData = [
     {
       id: 1,
@@ -38,42 +40,7 @@ const Order = () => {
       price: 150,
       status: "ordered",
     },
-    {
-      id: 2,
-      image:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRS3XIxU32blt_970vLRteGyjKpqUkt452cOc6zuIfI4SCBeWVNZU6MPV_JDL8MTzRUusw&usqp=CAU",
-      name: "Pepperoni",
-      toppings: ["Pepperoni", "Cheese"],
-      price: 150,
-      status: "recieved",
-    },
-    {
-      id: 2,
-      image:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRS3XIxU32blt_970vLRteGyjKpqUkt452cOc6zuIfI4SCBeWVNZU6MPV_JDL8MTzRUusw&usqp=CAU",
-      name: "Pepperoni",
-      toppings: ["Pepperoni", "Cheese"],
-      price: 150,
-      status: "recieved",
-    },
-    {
-      id: 2,
-      image:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRS3XIxU32blt_970vLRteGyjKpqUkt452cOc6zuIfI4SCBeWVNZU6MPV_JDL8MTzRUusw&usqp=CAU",
-      name: "Pepperoni",
-      toppings: ["Pepperoni", "Cheese"],
-      price: 150,
-      status: "recieved",
-    },
-    {
-      id: 2,
-      image:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRS3XIxU32blt_970vLRteGyjKpqUkt452cOc6zuIfI4SCBeWVNZU6MPV_JDL8MTzRUusw&usqp=CAU",
-      name: "Pepperoni",
-      toppings: ["Pepperoni", "Cheese"],
-      price: 150,
-      status: "recieved",
-    },
+    // Add more sample data as needed
   ];
 
   return (
@@ -100,7 +67,7 @@ const Order = () => {
         }}
       >
         <Box sx={{ display: "flex", gap: 5 }}>
-          {/*large images */}
+          {/* Large image */}
           <Box
             sx={{
               display: "flex",
@@ -117,8 +84,7 @@ const Order = () => {
               sx={{ width: "85%", height: "95%", alignSelf: "center" }}
             />
           </Box>
-
-          {/* right images */}
+          {/* Right images */}
           <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
             <Box
               sx={{
@@ -154,11 +120,10 @@ const Order = () => {
             </Box>
           </Box>
         </Box>
-
-        <MenuItemCard menuItem={pizza} />
+        {pizza && <MenuItemCard menuItem={pizza} />}{" "}
+        {/* Pass pizza data if available */}
       </Box>
-
-      {/*  RELATED  CUSTOMER OREDERS  */}
+      {/* RELATED CUSTOMER ORDERS */}
       <Box
         sx={{
           background: "#FFF8F1",
@@ -174,7 +139,6 @@ const Order = () => {
         >
           Related
         </Typography>
-
         <Box
           sx={{
             display: "flex",
@@ -190,7 +154,7 @@ const Order = () => {
         >
           <Box sx={{ display: "flex", flexWrap: "nowrap", gap: "10px" }}>
             {Array.isArray(pizzaData) &&
-              pizzaData.map((pizza, index) => (
+              pizzaData.map((relatedPizza, index) => (
                 <Box
                   key={index}
                   sx={{
@@ -199,7 +163,7 @@ const Order = () => {
                     flexShrink: 0,
                   }}
                 >
-                  <RelatedOrderCard pizza={pizza} />
+                  <RelatedOrderCard pizza={relatedPizza} />
                 </Box>
               ))}
           </Box>

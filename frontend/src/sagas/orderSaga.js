@@ -3,6 +3,9 @@ import {
   addOrderItemFailure,
   addOrderItemRequest,
   addOrderItemSuccess,
+  fetchOrderFailure,
+  fetchOrderRequest,
+  fetchOrderSuccess,
 } from "../redux/orderSlice";
 import axios from "axios";
 
@@ -36,4 +39,20 @@ function* addOrderItem(action) {
 
 export function* watchAddOrder() {
   yield takeLatest(addOrderItemRequest.type, addOrderItem);
+}
+
+
+// fetch order
+function* fetchOrderSaga() {
+  try {
+    const response = yield call(axios.get, "http://localhost:4000/order/get-order");
+    const data = yield response.data;
+    yield put(fetchOrderSuccess(data));
+  } catch (error) {
+    yield put(fetchOrderFailure(error.message));
+  }
+}
+
+export function* watchFetchOrder() {
+  yield takeLatest(fetchOrderRequest.type, fetchOrderSaga);
 }
