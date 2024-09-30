@@ -25,35 +25,11 @@ const Order = () => {
     }
   }, [dispatch]);
 
-  // console.log("pizza order:", pizza);
-
   // Check if pizza is loaded before accessing its properties
   const imageUrl = pizza?.photo
     ? `http://localhost:4000/${pizza.photo.replace(/\\/g, "/")}`
     : "http://localhost:4000/uploads/placeholder.png";
-
-  // Sample related pizza data
-  const pizzaData = [
-    {
-      id: 1,
-      image:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRS3XIxU32blt_970vLRteGyjKpqUkt452cOc6zuIfI4SCBeWVNZU6MPV_JDL8MTzRUusw&usqp=CAU",
-      name: "Margherita",
-      toppings: ["Cheese", "Tomato"],
-      price: 120,
-      status: "ordered",
-    },
-    {
-      id: 2,
-      image:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRS3XIxU32blt_970vLRteGyjKpqUkt452cOc6zuIfI4SCBeWVNZU6MPV_JDL8MTzRUusw&usqp=CAU",
-      name: "Pepperoni",
-      toppings: ["Pepperoni", "Cheese"],
-      price: 150,
-      status: "ordered",
-    },
-    // Add more sample data as needed
-  ];
+  
 
   return (
     <Box
@@ -133,8 +109,8 @@ const Order = () => {
           </Box>
         </Box>
         {pizza && <MenuItemCard menuItem={pizza} />}{" "}
-        {/* Pass pizza data if available */}
       </Box>
+
       {/* RELATED CUSTOMER ORDERS */}
       <Box
         sx={{
@@ -165,7 +141,7 @@ const Order = () => {
           }}
         >
           <Box sx={{ display: "flex", flexWrap: "nowrap", gap: "10px" }}>
-            {Array.isArray(pizzaData) &&
+            {Array.isArray(order) &&
               order.map((relatedPizza, index) => (
                 <Box
                   key={index}

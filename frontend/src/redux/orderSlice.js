@@ -37,7 +37,6 @@ const orderSlice = createSlice({
     fetchOrderSuccess: (state, action) => {
       state.loading = false;
       state.order = action.payload;
-      // console.log("slice:", state.menu);
     },
     fetchOrderFailure: (state, action) => {
       state.loading = false;
@@ -52,7 +51,6 @@ const orderSlice = createSlice({
     fetchSpecificOrderSuccess: (state, action) => {
       state.loading = false;
       state.order = action.payload;
-      // console.log("slice:", action.payload);
     },
     fetchSpecificOrderFailure: (state, action) => {
       state.loading = false;

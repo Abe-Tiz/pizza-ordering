@@ -15,9 +15,6 @@ const MenuItemCard = ({ menuItem }) => {
     const logedinCustomer = localStorage.getItem("customer-data")
       ? JSON.parse(localStorage.getItem("customer-data"))
     : null;
-  
-  // console.log("customer:", logedinCustomer);
-  // console.log("customer id:", logedinCustomer.id);
 
   const handleToppingChange = (topping) => {
     setSelectedToppings((prev) => {
@@ -124,6 +121,7 @@ const MenuItemCard = ({ menuItem }) => {
         Order
         <ArrowForwardIcon sx={{ marginLeft: 1, transform: "rotate(-50deg)" }} />
       </Button>
+      
       {/* Success Modal */}
       <SuccessMessage open={openModal} onClose={handleCloseModal} />
     </Box>

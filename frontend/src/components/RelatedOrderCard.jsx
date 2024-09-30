@@ -8,9 +8,8 @@ const RelatedOrderCard = ({ pizza }) => {
         backgroundColor: "#fff",
         display: "flex",
         flexDirection: "column",
-        // padding: 2,
         borderRadius: 3,
-              justifyContent: "center",
+        justifyContent: "center",
         alignItems:"center"
       }}
     >

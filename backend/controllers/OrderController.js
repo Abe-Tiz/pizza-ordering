@@ -1,7 +1,6 @@
 const { addOrderItem, getOrder, getSpecificOrder } = require("../models/OrderModel");
 
 const createOrderItem = async (req, res) => {
-    //  console.log("Request Body:", req.body); 
   const { name, toppings, price, photo, quantity, status, customer_id } =
     req.body;
     if (!name) {
@@ -31,7 +30,6 @@ const OrderedCustomerHistory = async (req,res) =>{
   try {
     const { customer_id } = req.body;
     const specificOrder = await getSpecificOrder(customer_id);
-    // console.log("customer ordered Items:", specificOrder);
     res.status(200).json(specificOrder);
   } catch (error) {
     console.error(error);
