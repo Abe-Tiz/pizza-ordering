@@ -138,7 +138,6 @@ const customerRegister = async (req, res) => {
 // login user
 const loginUser = async (req, res) => {
   const { email, password} = req.body;
-
   try {
     const user = await getCustomerByEmail(email);
 
@@ -149,23 +148,23 @@ const loginUser = async (req, res) => {
     if (!isPasswordValid) {
       return res.status(401).json({ message: "Password is not matched!" });
     }
-    
     // Generate a JWT token
     const token = jwt.sign(
       { id: user.id, email: user.email },
       process.env.JWT_SECRET,
       {
-        expiresIn: "1h",
+        expiresIn: "1hr",
       }
     );
-    // console.log(user);
-    return res.status(200).json({success:"Success", user, token });
+    // console.log("user:",user.id);
+    return res.status(200).json({success:"Success", user:user.id, token });
      
   } catch (error) {
     console.error("Error logging in admin:", error);
     return res.status(500).json({ message: "Internal server error" });
   }
 };
+
 
 module.exports = {
   register,

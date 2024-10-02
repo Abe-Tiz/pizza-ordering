@@ -30,6 +30,7 @@ const OrderedCustomerHistory = async (req,res) =>{
   try {
     const { customer_id } = req.body;
     const specificOrder = await getSpecificOrder(customer_id);
+    console.log("history:", specificOrder);
     res.status(200).json(specificOrder);
   } catch (error) {
     console.error(error);

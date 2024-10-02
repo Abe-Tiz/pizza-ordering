@@ -27,7 +27,7 @@ const Header = () => {
   const menuItems = [
     { text: "Home", path: "/" },
     { text: "Orders", path: "/orders" },
-    { text: "Who we are", path: "/about" },
+    { text: "Who we are", path: "/" },
   ];
 
   const drawerList = () => (
@@ -42,6 +42,20 @@ const Header = () => {
             <ListItemText primary={text} />
           </ListItem>
         ))}
+        <NavLink
+          to="/admin-register"
+          color="inherit"
+          style={{
+            backgroundColor: "#FF890F",
+            color: "white",
+            padding: "5px 15px",
+            marginLeft:16,
+            textDecoration: "none",
+            borderRadius: "5px",
+          }}
+        >
+          Register
+        </NavLink>
       </List>
     </div>
   );
@@ -53,7 +67,7 @@ const Header = () => {
         sx={{
           background: "linear-gradient(to bottom, #FEF2E6, #FFDDBB, #FEF3E7)",
           color: "gray",
-          width:"100%"
+          width: "100%",
         }}
       >
         <Toolbar
@@ -122,8 +136,8 @@ const Header = () => {
                     </NavLink>
                   ))}
                 </Box>
-                  <NavLink
-                    to="/register"
+                <NavLink
+                  to="/admin-register"
                   color="inherit"
                   style={{
                     backgroundColor: "#FF890F",

@@ -4,6 +4,11 @@ import Button from "./Button";
 import { NavLink } from "react-router-dom";
 
 const OrderedHistoryCard = ({ pizza }) => {
+
+     const imageUrl = pizza.photo
+       ? `http://localhost:4000/${pizza.photo.replace(/\\/g, "/")}`
+    : "http://localhost:4000/uploads/placeholder.png";
+  
   return (
     <Box
       sx={{
@@ -29,8 +34,8 @@ const OrderedHistoryCard = ({ pizza }) => {
       >
         {" "}
         <Avatar
-          src={pizza.image}
-          sx={{ width: "85%", height: "85%", alignSelf: "center"}}
+          src={imageUrl}
+          sx={{ width: "85%", height: "85%", alignSelf: "center" }}
         />
       </Box>
 
@@ -76,7 +81,7 @@ const OrderedHistoryCard = ({ pizza }) => {
           </Typography>
         </Typography>
         <NavLink
-          to="/register"
+          // to="/register"
           color="inherit"
           style={{
             backgroundColor: "transparent",

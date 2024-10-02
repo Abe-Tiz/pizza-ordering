@@ -52,8 +52,10 @@ function* fetchSpecificOrderSaga(action) {
     const response = yield call(
       axios.post,
       "http://localhost:4000/order/get-customer-order",
-       { customer_id: action.payload }
-    );;
+       action.payload 
+    );
+    console.log("saga:",action.payload)
+    // console.log("saga:", response.data);
     yield put(fetchSpecificOrderSuccess(response.data));
   } catch (error) {
     yield put(fetchSpecificOrderFailure(error.message));

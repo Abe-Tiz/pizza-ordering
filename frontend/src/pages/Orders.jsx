@@ -1,9 +1,21 @@
 import { Box, Typography } from "@mui/material";
-import React from "react";
+import React, { useEffect } from "react";
 import { Grid } from "@mui/material";
 import OrderedHistoryCard from "../components/OrderedHistoryCard";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchOrderRequest } from "../redux/orderSlice";
 
 const PopularPizza = () => {
+  const dispatch = useDispatch();
+  const {order,error,loading} = useSelector((state) => state.order)
+
+  useEffect(() => {
+     dispatch(fetchOrderRequest());
+  }, [dispatch])
+  
+  console.log("order:", order)
+  
+
   const pizzaData = [
     {
       id: 1,
@@ -78,11 +90,12 @@ const PopularPizza = () => {
         Order History
       </Typography>
       <Grid container spacing={2}>
-        {pizzaData.map((pizza) => (
-          <Grid item xs={12} sm={6} md={4} key={pizza.id}>
-            <OrderedHistoryCard pizza={pizza} />
-          </Grid>
-        ))}
+        {Array.isArray(order) &&
+           order.map((pizza) => (
+            <Grid item xs={12} sm={6} md={4} key={pizza.id}>
+              <OrderedHistoryCard pizza={pizza} />
+            </Grid>
+          ))}
       </Grid>
     </Box>
   );

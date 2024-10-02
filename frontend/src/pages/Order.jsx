@@ -4,32 +4,38 @@ import MenuItemCard from "../components/MenuItemCard";
 import RelatedOrderCard from "../components/RelatedOrderCard";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchSpecificOrderRequest } from "../redux/orderSlice";
+import { useNavigate } from "react-router-dom";
 
 const Order = () => {
   const [pizza, setPizza] = useState(null);
   const dispatch = useDispatch();
-  const { order, error, loading } = useSelector((state) => state.order);
-  console.log("order selector:",order)
+  const { order } = useSelector((state) => state.order);
+  const navigate = useNavigate();
 
   useEffect(() => {
-    const logedinCustomer = localStorage.getItem("customer-data")
-      ? JSON.parse(localStorage.getItem("customer-data"))
-      : null;
-
+    const logedinCustomer = localStorage.getItem("logedin-data");
     if (logedinCustomer) {
-      dispatch(fetchSpecificOrderRequest(logedinCustomer.id));
+      dispatch(fetchSpecificOrderRequest({customer_id:logedinCustomer}));
     }
+
     const storedPizza = JSON.parse(localStorage.getItem("pizza-data"));
     if (storedPizza) {
       setPizza(storedPizza);
     }
-  }, [dispatch]);
 
+    const logoutTimer = setTimeout(() => {
+      localStorage.removeItem("logedin-data");
+      navigate("/")
+    }, 120000);  
+    
+    return () => clearTimeout(logoutTimer);
+
+  }, [dispatch]);
+ 
   // Check if pizza is loaded before accessing its properties
   const imageUrl = pizza?.photo
     ? `http://localhost:4000/${pizza.photo.replace(/\\/g, "/")}`
     : "http://localhost:4000/uploads/placeholder.png";
-  
 
   return (
     <Box

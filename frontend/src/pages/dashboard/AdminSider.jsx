@@ -1,9 +1,16 @@
 import { Box, Button, Typography } from '@mui/material';
 import React from 'react'
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import pizzaLogo from "../../assets/images/pizza-logo.png";
 
 const AdminSider = () => {
+  const navigate = useNavigate();
+
+     const logout = () => {
+       localStorage.removeItem("amin-token");
+       navigate("/admin-login");
+     };
+  
   return (
     <Box
       sx={{
@@ -74,7 +81,7 @@ const AdminSider = () => {
         </NavLink>
         <Button
           sx={{ padding: "2em 2em", color: "red", fontWeight: 700 }}
-          //  onClick={logout}
+          onClick={logout}
         >
           Logout
         </Button>

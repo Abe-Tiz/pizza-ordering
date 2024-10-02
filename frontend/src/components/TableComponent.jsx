@@ -94,8 +94,9 @@ const TableComponent = ({
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               .map((row) => (
                 <TableRow key={row.id || row.name}>
-                  <TableCell>{row.name}</TableCell>
-                  <TableCell style={{ color: "#fc9936" }} align="right">
+                  {row.name && <TableCell>{row.name}</TableCell>}
+                  
+                 { row.toppings && <TableCell style={{ color: "#fc9936" }} align="right">
                     <Tooltip title="View Toppings">
                       <IconButton
                         sx={{ color: "#fc9936" }}
@@ -105,7 +106,7 @@ const TableComponent = ({
                       </IconButton>
                     </Tooltip>
                     Toppings
-                  </TableCell>
+                  </TableCell>}
                   {row.quantity && (
                     <TableCell align="right">{row.quantity}</TableCell>
                   )}
@@ -115,7 +116,8 @@ const TableComponent = ({
                   <TableCell align="right">
                     {new Date(row.created_date).toISOString().split("T")[0]}
                   </TableCell>
-                  <TableCell align="right">
+
+                { row.status &&  <TableCell align="right">
                     {status[row.id] === "Delivered" ||
                     row.status === "Delivered" ? (
                       <Typography sx={{ color: "green" }}>
@@ -145,7 +147,7 @@ const TableComponent = ({
                         <MenuItem value="Delivered">Delivered</MenuItem>
                       </Select>
                     )}
-                  </TableCell>
+                  </TableCell>}
                   <TableCell align="right">
                     {onToggleStatus && (
                       <FormControlLabel

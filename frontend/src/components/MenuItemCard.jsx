@@ -5,16 +5,25 @@ import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import SuccessMessage from "./SuccessMessage";
 import { useDispatch } from "react-redux";
 import { addOrderItemRequest } from "../redux/orderSlice";
+import { useNavigate } from "react-router-dom";
 
 const MenuItemCard = ({ menuItem }) => {
   const [quantity, setQuantity] = useState(1);
   const [selectedToppings, setSelectedToppings] = useState([]);
   const [openModal, setOpenModal] = useState(false);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-    const logedinCustomer = localStorage.getItem("customer-data")
-      ? JSON.parse(localStorage.getItem("customer-data"))
-    : null;
+    const logedinCustomer = localStorage.getItem("logedin-data")
+  
+  useEffect(() => {
+     const pizzaLogoutTimer = setTimeout(() => {
+       localStorage.removeItem("pizza-data");
+       navigate("/");
+     }, 180000);
+
+     return () => clearTimeout(pizzaLogoutTimer);
+  },[dispatch])
 
   const handleToppingChange = (topping) => {
     setSelectedToppings((prev) => {

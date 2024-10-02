@@ -25,14 +25,12 @@ const Login = () => {
   });
   const { customer, error, loading } = useSelector((state) => state.user);
 
-  
-  useEffect(() => {
-    dispatch(CUSTOMER_LOGIN_REQUEST(formData))
-  },[dispatch])
+  // useEffect(() => {
+  //   dispatch(CUSTOMER_LOGIN_REQUEST(formData));
+  // }, [dispatch]);
 
+  // console.log("logged:", customer);
 
-  console.log("logged:", customer);
-  
   // Handle change in input fields
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -42,18 +40,24 @@ const Login = () => {
     }));
   };
 
- 
   // Handle submit
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-        localStorage.setItem("customer-login", JSON.stringify(customer.token)); 
-        localStorage.setItem("customer-data", JSON.stringify(customer.user));  
-        navigate("/customer-order"); 
+       dispatch(CUSTOMER_LOGIN_REQUEST(formData));
+      // localStorage.setItem("customer-login", JSON.stringify(customer.token));
+      localStorage.setItem("logedin-data", JSON.stringify(customer.user));
+   console.log("logged:", customer,customer.success);
+      if (customer.success =="Success") {
+        navigate("/customer-order");
+      }
     } catch (error) {
       console.log(error);
     }
   };
+
+
+
 
   return (
     <Box

@@ -47,10 +47,12 @@ const orderSlice = createSlice({
     fetchSpecificOrderRequest: (state,action) => {
       state.loading = true;
       state.error = null;
+      console.log("Fetching specific order with payload:", action.payload);
     },
     fetchSpecificOrderSuccess: (state, action) => {
       state.loading = false;
       state.order = action.payload;
+      console.log("slice:",action.payload)
     },
     fetchSpecificOrderFailure: (state, action) => {
       state.loading = false;

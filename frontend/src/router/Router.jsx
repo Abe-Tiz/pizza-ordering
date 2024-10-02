@@ -15,7 +15,8 @@ import ViewRole from "../pages/role/ViewRole";
 import Order from "../pages/Order";
 import ProtectedRoute from "../private/ProtectedRoute";
 import ViewOrder from "../pages/order/ViewOrder";
-  
+import AdminProtectedRoute from "../private/AdminProtectedRoute";
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -53,7 +54,7 @@ const router = createBrowserRouter([
   },
   {
     path: "admin-dashboard",
-    element: <AdminLayout />,
+    element: <AdminProtectedRoute element={AdminLayout} />,
     children: [
       {
         path: "",

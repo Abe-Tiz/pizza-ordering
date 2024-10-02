@@ -8,13 +8,16 @@ const PizzaCard = ({ pizza, user }) => {
 
   const handleOrderClick = () => {
    localStorage.setItem("pizza-data", JSON.stringify(pizza));
-   const isAuthenticated = !!localStorage.getItem("customer-login");
+    const isAuthenticated = !!localStorage.getItem("customer-login");
+    //  console.log("logedin customerrr:", isAuthenticated);
+
    if (isAuthenticated) {
-     navigate("/customer-order", { state: { pizza } });
+     navigate("/customer-order");
    } else {
      navigate("/login"); 
    }
- };
+  };
+  // console.log("pizzzz:",pizza)
    const imageUrl = pizza.photo
      ? `http://localhost:4000/${pizza.photo.replace(/\\/g, "/")}`
      : "http://localhost:4000/uploads/placeholder.png";
