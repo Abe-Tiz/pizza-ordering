@@ -1,7 +1,5 @@
 import { createBrowserRouter } from "react-router-dom";
 import Main from "../layout/Main";
-import Hero from "../components/Hero";
-import Orders from "../pages/Orders";
 import Home from "../pages/Home";
 import Register from "../pages/auth/Register";
 import Login from "../pages/auth/Login";
@@ -12,10 +10,11 @@ import AddMenu from "../pages/dashboard/AddMenu";
 import OrderedMenu from "../pages/dashboard/OrderedMenu";
 import Role from "../pages/dashboard/Role";
 import ViewRole from "../pages/role/ViewRole";
-import Order from "../pages/Order";
 import ProtectedRoute from "../private/ProtectedRoute";
 import ViewOrder from "../pages/order/ViewOrder";
 import AdminProtectedRoute from "../private/AdminProtectedRoute";
+import Order from '../pages/order/Order';
+import Orders from '../pages/order/Orders';
 
 const router = createBrowserRouter([
   {

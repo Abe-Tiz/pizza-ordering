@@ -69,7 +69,7 @@ const AdminRegister = () => {
 
       setErrors({});
       dispatch(registerRequest(formData)); 
-      // navigate("/admin-login");
+      navigate("/admin-login");
     } catch (error) {
       if (error instanceof z.ZodError) {
         const formattedErrors = {};

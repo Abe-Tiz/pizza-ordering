@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { Box, Avatar, Typography } from "@mui/material";
-import MenuItemCard from "../components/MenuItemCard";
-import RelatedOrderCard from "../components/RelatedOrderCard";
+import MenuItemCard from "../../components/MenuItemCard";
+import RelatedOrderCard from "../../components/RelatedOrderCard";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchSpecificOrderRequest } from "../redux/orderSlice";
+import { fetchSpecificOrderRequest } from "../../redux/orderSlice";
 import { useNavigate } from "react-router-dom";
 
 const Order = () => {

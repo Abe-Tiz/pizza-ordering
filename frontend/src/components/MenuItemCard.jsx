@@ -60,7 +60,7 @@ const MenuItemCard = ({ menuItem }) => {
       photo: menuItem.photo,
       quantity: Number(quantity),
       status: "Pending",
-      customer_id: logedinCustomer.id,
+      customer_id: logedinCustomer,
     };
 
     dispatch(addOrderItemRequest(orderData));

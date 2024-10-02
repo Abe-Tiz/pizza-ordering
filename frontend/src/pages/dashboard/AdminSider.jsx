@@ -2,6 +2,7 @@ import { Box, Button, Typography } from '@mui/material';
 import React from 'react'
 import { NavLink, useNavigate } from 'react-router-dom';
 import pizzaLogo from "../../assets/images/pizza-logo.png";
+import MenuIcon from "@mui/icons-material/Menu";
 
 const AdminSider = () => {
   const navigate = useNavigate();
@@ -30,7 +31,7 @@ const AdminSider = () => {
         }}
       >
         <Typography variant="h6">PIZZA</Typography>
-        <Typography variant="h6">Icon</Typography>
+        <MenuIcon />
       </Box>
       <Box
         sx={{

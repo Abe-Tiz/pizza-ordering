@@ -19,8 +19,7 @@ const AdminHeader = ({ title }) => {
       <Box sx={{ display: "flex", alignItems: "center" }}>
         <IconButton aria-label="notifications">
           <Badge badgeContent={4} color="secondary">
-            {" "}
-            
+            {" "} 
             <NotificationsIcon />
           </Badge>
         </IconButton>

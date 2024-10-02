@@ -1,9 +1,9 @@
 import { Box, Typography } from "@mui/material";
 import React, { useEffect } from "react";
 import { Grid } from "@mui/material";
-import OrderedHistoryCard from "../components/OrderedHistoryCard";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchOrderRequest } from "../redux/orderSlice";
+import { fetchOrderRequest } from "../../redux/orderSlice";
+import OrderedHistoryCard from '../../components/OrderedHistoryCard';
 
 const PopularPizza = () => {
   const dispatch = useDispatch();
