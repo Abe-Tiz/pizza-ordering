@@ -41,6 +41,21 @@ const menuSlice = createSlice({
       state.loading = false;
       state.error = action.payload;
     },
+
+    // delete menu
+    deleteMenuRequest: (state) => {
+      state.loading = true;
+      state.error = null;
+    },
+    deleteMenuSuccess: (state, action) => {
+      state.loading = false;
+      state.menu = action.payload;
+      console.log("slice:",state.menu);
+    },
+    deleteMenuFailure: (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    },
   },
 });
 
@@ -51,6 +66,9 @@ export const {
   fetchMenuRequest,
   fetchMenuSuccess,
   fetchMenuFailure,
+  deleteMenuRequest,
+  deleteMenuSuccess,
+  deleteMenuFailure,
 } = menuSlice.actions;
 
 export default menuSlice.reducer;

@@ -7,6 +7,9 @@ import {
   fetchMenuSuccess,
   fetchMenuFailure,
   fetchMenuRequest,
+  deleteMenuSuccess,
+  deleteMenuFailure,
+  deleteMenuRequest,
 } from "../redux/menuSlice";
 import axios from "axios";
 
@@ -59,4 +62,19 @@ function* fetchMenuSaga() {
 
 export function* watchFetchMenu() {
   yield takeLatest(fetchMenuRequest.type, fetchMenuSaga);
+}
+
+// fetch menu
+function* deleteMenuSaga() {
+  try {
+    const response = yield call(axios.delete, "http://localhost:4000/menu/delete/:id");
+    const data = yield response.data;
+    yield put(deleteMenuSuccess(data));
+  } catch (error) {
+    yield put(deleteMenuFailure(error.message));
+  }
+}
+
+export function* watchdeleteMenu() {
+  yield takeLatest(deleteMenuRequest.type, deleteMenuSaga);
 }
