@@ -27,7 +27,7 @@ const AddMenu = () => {
     "Pepperoni",
     "Mushrooms",
   ]);
-  const { menu, error, loading } = useSelector((state) => state.menu);
+  const { menu} = useSelector((state) => state.menu);
   console.log("menu:", menu);
 
   const handleChange = (e) => {

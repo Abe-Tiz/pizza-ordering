@@ -47,7 +47,7 @@ const Login = () => {
        dispatch(CUSTOMER_LOGIN_REQUEST(formData));
       // localStorage.setItem("customer-login", JSON.stringify(customer.token));
       localStorage.setItem("logedin-data", JSON.stringify(customer.user));
-   console.log("logged:", customer,customer.success);
+  //  console.log("logged:", customer,customer.success);
       if (customer.success =="Success") {
         navigate("/customer-order");
       }

@@ -7,8 +7,8 @@ const createUser = async (userData) => {
     userData;
 
   const result = await pool.query(
-    "INSERT INTO users (adminName, email, password, restaurantName, location, phone, logo) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *",
-    [adminName, email, password, restaurantName, location, phone, logo]
+    "INSERT INTO users (adminName, email, password, restaurantName, location, phone, logo,role) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *",
+    [adminName, email, password, restaurantName, location, phone, logo,role]
   );
 
   return result.rows[0];

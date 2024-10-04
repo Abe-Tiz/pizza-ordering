@@ -58,11 +58,12 @@ const AdminLogin = () => {
       }
 
       setErrors({});
-      console.log("results:", error, user.token,loading);
+      // console.log("results:", user);
       
       await dispatch(loginRequest(formData));
-      if (!error && !loading) {
+      if (user.success == "Success") {
         localStorage.setItem("amin-token", user.token);
+        localStorage.setItem("admin-data",JSON.stringify(user.user));
         navigate("/admin-dashboard");
       } 
     } catch (error) {

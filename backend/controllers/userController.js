@@ -96,7 +96,7 @@ const loginAdmin = async (req, res) => {
       }
     );
     // console.log(user);
-    return res.status(200).json({ user, token });
+    return res.status(200).json({ success: "Success", user, token });
      
   } catch (error) {
     console.error("Error logging in admin:", error);
