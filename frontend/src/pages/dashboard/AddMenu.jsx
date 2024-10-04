@@ -5,7 +5,7 @@ import {
   Typography,
   Grid,
 } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import UploadIcon from "@mui/icons-material/Upload";
 import { useDispatch, useSelector } from "react-redux";
 import { addMenuItemRequest } from "../../redux/menuSlice"; 
@@ -13,22 +13,32 @@ import CustomCheckbox from "./CustomeCheckBox";
 
 const AddMenu = () => {
   const dispatch = useDispatch();
+
+  // Retrieve restaurant ID from local storage
+  const restaurantData = localStorage.getItem("admin-data");
+  const restaurant_admin_id = restaurantData
+    ? JSON.parse(restaurantData).id
+    : null;
+
   const [formData, setFormData] = useState({
     name: "",
     toppings: [],
     price: "",
     photo: null,
+    restaurant_id: restaurant_admin_id,
   });
   const [photoPreview, setPhotoPreview] = useState(null);
   const [newTopping, setNewTopping] = useState("");
   const [showNewToppingInput, setShowNewToppingInput] = useState(false);
+
   const [availableToppings, setAvailableToppings] = useState([
     "Cheese",
     "Pepperoni",
     "Mushrooms",
   ]);
-  const { menu} = useSelector((state) => state.menu);
-  console.log("menu:", menu);
+
+  const { menu } = useSelector((state) => state.menu);
+  // console.log("menu:", menu);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -79,7 +89,7 @@ const AddMenu = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(addMenuItemRequest(formData));  
+    dispatch(addMenuItemRequest(formData));
   };
 
   return (
@@ -168,7 +178,11 @@ const AddMenu = () => {
             <Button
               variant="contained"
               component="label"
-              sx={{ backgroundColor: "transparent", color: "#FF9921",padding:2 }}
+              sx={{
+                backgroundColor: "transparent",
+                color: "#FF9921",
+                padding: 2,
+              }}
             >
               <UploadIcon sx={{ marginRight: 1 }} />
               Upload Pizza Photo
@@ -196,7 +210,7 @@ const AddMenu = () => {
               variant="contained"
               color="primary"
               fullWidth
-              sx={{ backgroundColor: "#FF9921", borderRadius: 10,padding:2 }}
+              sx={{ backgroundColor: "#FF9921", borderRadius: 10, padding: 2 }}
             >
               Submit
             </Button>

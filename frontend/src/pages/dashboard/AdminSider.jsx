@@ -10,6 +10,7 @@ const AdminSider = () => {
 
   const logout = () => {
     localStorage.removeItem("amin-token");
+    localStorage.removeItem("admin-data");
     navigate("/admin-login");
   };
 

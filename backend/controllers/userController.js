@@ -8,8 +8,8 @@ const dotenv = require("dotenv");
 dotenv.config();
 
 const register = async (req, res) => {
-  const { adminName, email, password, restaurantName, location, phone, logo } =
-    req.body;
+  const { adminName, email, password, restaurantName, location, phone,role="admin" } = req.body;
+    const logo = req.file ? req.file.path : null;
 
   try {
     registerSchema.parse(req.body);
@@ -31,16 +31,10 @@ const register = async (req, res) => {
       location,
       phone,
       logo,
+      role
     });
-
-    // Generate JWT
-    const token = jwt.sign(
-      { id: user.id, email: user.email },
-      process.env.JWT_SECRET,
-      { expiresIn: "1h" }
-    );
    
-    res.status(201).json({ success: true, token, user });
+    res.status(201).json({ success: true, user });
   } catch (error) {
     if (error instanceof z.ZodError) {
       return res.status(400).json({ success: false, errors: error.errors });

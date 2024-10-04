@@ -3,11 +3,11 @@ const {pool} = require("../config/Db");
 
 // create admin user
 const createUser = async (userData) => {
-  const { adminName, email, password, restaurantName, location, phone, logo } =
+  const { adminName, email, password, restaurantName, location, phone, logo,role } =
     userData;
 
   const result = await pool.query(
-    "INSERT INTO users (adminName, email, password, restaurantName, location, phone, logo,role) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *",
+    "INSERT INTO users (adminName, email, password, restaurantName, location, phone, logo,role) VALUES ($1, $2, $3, $4, $5, $6, $7,$8) RETURNING *",
     [adminName, email, password, restaurantName, location, phone, logo,role]
   );
 

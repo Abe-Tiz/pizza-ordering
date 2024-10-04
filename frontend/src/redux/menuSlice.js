@@ -9,6 +9,7 @@ const menuSlice = createSlice({
       toppings: [],
       price: "",
       photo: "",
+      restaurant_id:""
     },
     loading: false,
     error: null,
@@ -21,6 +22,7 @@ const menuSlice = createSlice({
     addMenuItemSuccess: (state, action) => {
       state.loading = false;
       state.menu = action.payload;
+      // console.log("slice:", state.menu);
     },
     addMenuItemFailure: (state, action) => {
       state.loading = false;
@@ -50,7 +52,7 @@ const menuSlice = createSlice({
     deleteMenuSuccess: (state, action) => {
       state.loading = false;
       state.menu = action.payload;
-      console.log("slice:",state.menu);
+      
     },
     deleteMenuFailure: (state, action) => {
       state.loading = false;

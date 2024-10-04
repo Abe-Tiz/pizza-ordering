@@ -14,7 +14,7 @@ const addMenuItem = async (name, toppings, price, photo,restaurant_id) => {
 };
 
 const getMenu = async () => {
-  const result = await pool.query("SELECT * FROM menu");
+  const result = await pool.query(`SELECT m.*,u.restaurantName,u.logo FROM "menu" m join "users" u  on m.restaurant_id = u.id`);
   return result.rows;
 };
 

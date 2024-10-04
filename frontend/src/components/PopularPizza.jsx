@@ -10,7 +10,8 @@ import { FetchRestaurantRequest } from "../redux/userSlice";
 const PopularPizza = () => {
   const dispatch = useDispatch()
    const { menu} = useSelector((state) => state.menu);
-   const { user } = useSelector((state) => state.user);
+  const { user } = useSelector((state) => state.user);
+  console.log("menu:",menu)
 
    useEffect(() => {
      dispatch(fetchMenuRequest());

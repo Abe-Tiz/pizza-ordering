@@ -20,6 +20,10 @@ const PizzaCard = ({ pizza, user }) => {
   // console.log("pizzzz:",pizza)
    const imageUrl = pizza.photo
      ? `http://localhost:4000/${pizza.photo.replace(/\\/g, "/")}`
+    : "http://localhost:4000/uploads/placeholder.png";
+  
+   const logoUrl = pizza.logo
+     ? `http://localhost:4000/${pizza.logo.replace(/\\/g, "/")}`
      : "http://localhost:4000/uploads/placeholder.png";
   
   return (
@@ -103,7 +107,9 @@ const PizzaCard = ({ pizza, user }) => {
             alignItems: "center",
           }}
           onClick={handleOrderClick}
-        >Order</Button>
+        >
+          Order
+        </Button>
         {/* </Box> */}
       </Box>
 
@@ -116,13 +122,13 @@ const PizzaCard = ({ pizza, user }) => {
           justifyContent: "space-between",
         }}
       >
-        <Avatar src={pizza.ownerImage} sx={{ width: 34, height: 34, mr: 1 }} />
+        <Avatar src={logoUrl} sx={{ width: 34, height: 34, mr: 1 }} />
         <Typography
           variant="body2"
           color="text.secondary"
           sx={{ color: "#404040", fontWeight: "bold", fontSize: 20 }}
         >
-          {pizza.name}
+          {pizza.restaurantname}
         </Typography>
       </Box>
     </Box>

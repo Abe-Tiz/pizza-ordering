@@ -14,7 +14,7 @@ import {
 import axios from "axios";
 
 function* addMenuItem(action) {
-  const { name, toppings, price, photo } = action.payload;
+  const { name, toppings, price, photo,restaurant_id } = action.payload;
 
   const formData = new FormData();
   formData.append("name", name);
@@ -26,6 +26,7 @@ function* addMenuItem(action) {
 
   formData.append("price", price);
   formData.append("photo", photo);
+  formData.append("restaurant_id", restaurant_id);
 
   try {
     const response = yield call(
@@ -38,8 +39,8 @@ function* addMenuItem(action) {
         },
       }
     );
-
     yield put(addMenuItemSuccess(response.data));
+    console.log("saga:", response.data);
   } catch (error) {
     yield put(addMenuItemFailure(error.message));
   }
